@@ -78,6 +78,18 @@ namespace DumbCalculator
 								Stack.Push(second - top);
 							}
 							break;
+						case "*":
+							if (Stack.Count < 2)
+							{
+								Console.WriteLine("Not enough values to multiply! Please push more onto the stack and try again.");
+							}
+							else
+							{
+								var top = Stack.Pop();
+								var second = Stack.Pop();
+								Stack.Push(second * top);
+							}
+							break;
 						case "dump":
 							Console.WriteLine("Variables:");
 							foreach (var variable in Variables)
