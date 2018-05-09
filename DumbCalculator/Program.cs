@@ -134,7 +134,7 @@ namespace DumbCalculator
 				Stack.Push(Variables[input.Substring(1)]);
 				return true;
 			}
-			return parsedSuccessfully;
+			return false;
 		}
 
 		private static bool HandleVariableAssignIfPresent(string input, bool parsedSuccessfully)
@@ -151,7 +151,7 @@ namespace DumbCalculator
 				}
 				return true;
 			}
-			return parsedSuccessfully;
+			return false;
 		}
 
 		private static bool HandleNumberIfPresent(string input, bool parsedSuccessfully)
@@ -161,7 +161,7 @@ namespace DumbCalculator
 				Stack.Push(number);
 				return true;
 			}
-			return parsedSuccessfully;
+			return false;
 		}
 	}
 }
