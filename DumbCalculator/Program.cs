@@ -44,6 +44,10 @@ namespace DumbCalculator
 						Variables[input.Substring(1)] = Stack.Pop();
 					}
 				}
+				else if (input.StartsWith("$"))
+				{
+					Stack.Push(Variables[input.Substring(1)]);
+				}
 				else
 				{
 					switch (input)
