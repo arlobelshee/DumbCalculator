@@ -153,7 +153,7 @@ namespace DumbCalculator
 								quitting = true;
 							};
 							nextOp();
-							return;
+							break;
 						default:
 							nextOp = () => Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
 							nextOp();
