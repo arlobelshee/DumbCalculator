@@ -2,11 +2,12 @@
 
 namespace DumbCalculator
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
-    }
+	internal class Program
+	{
+		private static void Main(string[] args)
+		{
+			Console.WriteLine(
+				"I wish to do your bidding! I'm an RPN interpreter! I also support variables. use the special command ? to get help.");
+		}
+	}
 }

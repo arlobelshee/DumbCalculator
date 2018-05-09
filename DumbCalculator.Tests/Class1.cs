@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace DumbCalculator.Tests
+﻿namespace DumbCalculator.Tests
 {
-    public class Class1
-    {
-    }
+	public class Class1
+	{
+	}
 }
