@@ -36,7 +36,8 @@ namespace DumbCalculator
 				{
 					if (Stack.Count == 0)
 					{
-						Console.WriteLine("Nothing to store! Variable unaltered.");
+						Action op = () => Console.WriteLine("Nothing to store! Variable unaltered.");
+						op();
 					}
 					else
 					{
