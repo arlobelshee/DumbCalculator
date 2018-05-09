@@ -150,6 +150,7 @@ namespace DumbCalculator
 							{
 								Console.WriteLine("Quitting now.");
 								Console.ReadLine();
+								quitting = true;
 							};
 							nextOp();
 							return;
