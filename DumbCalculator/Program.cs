@@ -19,17 +19,22 @@ namespace DumbCalculator
 		{
 			Console.WriteLine(
 				"I wish to do your bidding! I'm an RPN interpreter! I also support variables. Use the special command ? to get help.");
-			Console.Write("> ");
-			var input = Console.ReadLine();
-			if(input.Trim() == "?")
+			while (true)
 			{
-				Console.WriteLine(HelpInfo);
-			}
-			if (input.Trim() == "q")
-			{
-				Console.WriteLine("Quitting now.");
-				Console.ReadLine();
-				return;
+				Console.Write("> ");
+				var input = Console.ReadLine();
+				if (input.Trim() == "?")
+				{
+					Console.WriteLine(HelpInfo);
+					continue;
+				}
+				if (input.Trim() == "q")
+				{
+					Console.WriteLine("Quitting now.");
+					Console.ReadLine();
+					return;
+				}
+				Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
 			}
 		}
 	}
