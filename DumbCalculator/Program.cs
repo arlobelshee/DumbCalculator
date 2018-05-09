@@ -36,16 +36,18 @@ namespace DumbCalculator
 				}
 				else if (input.StartsWith("="))
 				{
-					if (Stack.Count == 0)
+					nextOp = () =>
 					{
-						nextOp = () => Console.WriteLine("Nothing to store! Variable unaltered.");
-						nextOp();
-					}
-					else
-					{
-						nextOp = () => Variables[input.Substring(1)] = Stack.Pop();
-						nextOp();
-					}
+						if (Stack.Count == 0)
+						{
+							Console.WriteLine("Nothing to store! Variable unaltered.");
+						}
+						else
+						{
+							Variables[input.Substring(1)] = Stack.Pop();
+						}
+					};
+					nextOp();
 				}
 				else if (input.StartsWith("$"))
 				{
@@ -61,74 +63,70 @@ namespace DumbCalculator
 							nextOp();
 							break;
 						case "+":
-							if (Stack.Count < 2)
+							nextOp = () =>
 							{
-								nextOp = () => Console.WriteLine("Not enough values to add! Please push more onto the stack and try again.");
-								nextOp();
-							}
-							else
-							{
-								nextOp = () =>
+								if (Stack.Count < 2)
+								{
+									Console.WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+								}
+								else
 								{
 									var top = Stack.Pop();
 									var second = Stack.Pop();
 									Stack.Push(second + top);
-								};
-								nextOp();
-							}
+								}
+							};
+							nextOp();
 							break;
 						case "-":
-							if (Stack.Count < 2)
+							nextOp = () =>
 							{
-								nextOp = () => Console.WriteLine(
-									"Not enough values to subtract! Please push more onto the stack and try again.");
-								nextOp();
-							}
-							else
-							{
-								nextOp = () =>
+								if (Stack.Count < 2)
+								{
+									Console.WriteLine(
+										"Not enough values to subtract! Please push more onto the stack and try again.");
+								}
+								else
 								{
 									var top = Stack.Pop();
 									var second = Stack.Pop();
 									Stack.Push(second - top);
-								};
-								nextOp();
-							}
+								}
+							};
+							nextOp();
 							break;
 						case "*":
-							if (Stack.Count < 2)
+							nextOp = () =>
 							{
-								nextOp = () => Console.WriteLine(
-									"Not enough values to multiply! Please push more onto the stack and try again.");
-								nextOp();
-							}
-							else
-							{
-								nextOp = () =>
+								if (Stack.Count < 2)
+								{
+									Console.WriteLine(
+										"Not enough values to multiply! Please push more onto the stack and try again.");
+								}
+								else
 								{
 									var top = Stack.Pop();
 									var second = Stack.Pop();
 									Stack.Push(second * top);
-								};
-								nextOp();
-							}
+								}
+							};
+							nextOp();
 							break;
 						case "/":
-							if (Stack.Count < 2)
+							nextOp = () =>
 							{
-								nextOp = () => Console.WriteLine("Not enough values to divide! Please push more onto the stack and try again.");
-								nextOp();
-							}
-							else
-							{
-								nextOp = () =>
+								if (Stack.Count < 2)
+								{
+									Console.WriteLine("Not enough values to divide! Please push more onto the stack and try again.");
+								}
+								else
 								{
 									var top = Stack.Pop();
 									var second = Stack.Pop();
 									Stack.Push(second / top);
-								};
-								nextOp();
-							}
+								}
+							};
+							nextOp();
 							break;
 						case "dump":
 							nextOp = () =>
