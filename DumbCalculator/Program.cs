@@ -28,11 +28,18 @@ namespace DumbCalculator
 				Console.Write("> ");
 				var input = Console.ReadLine().Trim();
 				if (input.StartsWith("="))
+				{
 					if (Stack.Count == 0)
+					{
 						Console.WriteLine("Nothing to store! Variable unaltered.");
+					}
 					else
+					{
 						Variables[input.Substring(1)] = Stack.Pop();
+					}
+				}
 				else
+				{
 					switch (input)
 					{
 						case "?":
@@ -46,6 +53,7 @@ namespace DumbCalculator
 							Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
 							break;
 					}
+				}
 			}
 		}
 	}
