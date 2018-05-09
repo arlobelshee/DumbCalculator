@@ -133,6 +133,7 @@ namespace DumbCalculator
 			{
 				parsedSuccessfully = true;
 				Stack.Push(Variables[input.Substring(1)]);
+				return parsedSuccessfully;
 			}
 			return parsedSuccessfully;
 		}
@@ -150,6 +151,7 @@ namespace DumbCalculator
 				{
 					Variables[input.Substring(1)] = Stack.Pop();
 				}
+				return parsedSuccessfully;
 			}
 			return parsedSuccessfully;
 		}
@@ -160,6 +162,7 @@ namespace DumbCalculator
 			{
 				parsedSuccessfully = true;
 				Stack.Push(number);
+				return parsedSuccessfully;
 			}
 			return parsedSuccessfully;
 		}
