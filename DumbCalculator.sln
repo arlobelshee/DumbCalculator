@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DumbCalculator", "DumbCalculator\DumbCalculator.csproj", "{7FF25189-9862-43B8-8F0F-4CA24557CE0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DumbCalculator.Tests", "DumbCalculator.Tests\DumbCalculator.Tests.csproj", "{33DB8518-C93C-4F91-A8AF-393C73D7CA82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7FF25189-9862-43B8-8F0F-4CA24557CE0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FF25189-9862-43B8-8F0F-4CA24557CE0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FF25189-9862-43B8-8F0F-4CA24557CE0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33DB8518-C93C-4F91-A8AF-393C73D7CA82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33DB8518-C93C-4F91-A8AF-393C73D7CA82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33DB8518-C93C-4F91-A8AF-393C73D7CA82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33DB8518-C93C-4F91-A8AF-393C73D7CA82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
