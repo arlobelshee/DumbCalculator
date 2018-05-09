@@ -24,7 +24,8 @@ namespace DumbCalculator
 		{
 			Console.WriteLine(
 				"I wish to do your bidding! I'm an RPN interpreter! I also support variables. Use the special command ? to get help.");
-			while (true)
+			var quitting = false;
+			while (!quitting)
 			{
 				Console.Write("> ");
 				var input = Console.ReadLine().Trim();
