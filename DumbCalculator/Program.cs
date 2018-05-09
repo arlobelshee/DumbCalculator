@@ -28,6 +28,7 @@ namespace DumbCalculator
 			{
 				Console.Write("> ");
 				var input = Console.ReadLine().Trim();
+				Action nextOp;
 				if (decimal.TryParse(input, out decimal number))
 				{
 					Stack.Push(number);
@@ -36,8 +37,8 @@ namespace DumbCalculator
 				{
 					if (Stack.Count == 0)
 					{
-						Action op = () => Console.WriteLine("Nothing to store! Variable unaltered.");
-						op();
+						nextOp = () => Console.WriteLine("Nothing to store! Variable unaltered.");
+						nextOp();
 					}
 					else
 					{
