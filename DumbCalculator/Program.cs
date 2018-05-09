@@ -131,9 +131,8 @@ namespace DumbCalculator
 		{
 			if (input.StartsWith("$"))
 			{
-				parsedSuccessfully = true;
 				Stack.Push(Variables[input.Substring(1)]);
-				return parsedSuccessfully;
+				return true;
 			}
 			return parsedSuccessfully;
 		}
@@ -142,7 +141,6 @@ namespace DumbCalculator
 		{
 			if (input.StartsWith("="))
 			{
-				parsedSuccessfully = true;
 				if (Stack.Count == 0)
 				{
 					Console.WriteLine("Nothing to store! Variable unaltered.");
@@ -151,7 +149,7 @@ namespace DumbCalculator
 				{
 					Variables[input.Substring(1)] = Stack.Pop();
 				}
-				return parsedSuccessfully;
+				return true;
 			}
 			return parsedSuccessfully;
 		}
@@ -160,9 +158,8 @@ namespace DumbCalculator
 		{
 			if (decimal.TryParse(input, out decimal number))
 			{
-				parsedSuccessfully = true;
 				Stack.Push(number);
-				return parsedSuccessfully;
+				return true;
 			}
 			return parsedSuccessfully;
 		}
