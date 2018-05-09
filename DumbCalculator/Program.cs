@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization.Json;
 
 namespace DumbCalculator
 {
@@ -54,6 +53,18 @@ namespace DumbCalculator
 					{
 						case "?":
 							Console.WriteLine(HelpInfo);
+							break;
+						case "+":
+							if (Stack.Count < 2)
+							{
+								Console.WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+							}
+							else
+							{
+								var top = Stack.Pop();
+								var second = Stack.Pop();
+								Stack.Push(top + second);
+							}
 							break;
 						case "dump":
 							Console.WriteLine("Variables:");
