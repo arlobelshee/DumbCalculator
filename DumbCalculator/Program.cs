@@ -33,7 +33,6 @@ namespace DumbCalculator
 				if (decimal.TryParse(input, out decimal number))
 				{
 					nextOp = () => Stack.Push(number);
-					nextOp();
 				}
 				else if (input.StartsWith("="))
 				{
@@ -48,12 +47,10 @@ namespace DumbCalculator
 							Variables[input.Substring(1)] = Stack.Pop();
 						}
 					};
-					nextOp();
 				}
 				else if (input.StartsWith("$"))
 				{
 					nextOp = () => Stack.Push(Variables[input.Substring(1)]);
-					nextOp();
 				}
 				else
 				{
@@ -61,7 +58,6 @@ namespace DumbCalculator
 					{
 						case "?":
 							nextOp = () => Console.WriteLine(HelpInfo);
-							nextOp();
 							break;
 						case "+":
 							nextOp = () =>
@@ -77,7 +73,6 @@ namespace DumbCalculator
 									Stack.Push(second + top);
 								}
 							};
-							nextOp();
 							break;
 						case "-":
 							nextOp = () =>
@@ -94,7 +89,6 @@ namespace DumbCalculator
 									Stack.Push(second - top);
 								}
 							};
-							nextOp();
 							break;
 						case "*":
 							nextOp = () =>
@@ -111,7 +105,6 @@ namespace DumbCalculator
 									Stack.Push(second * top);
 								}
 							};
-							nextOp();
 							break;
 						case "/":
 							nextOp = () =>
@@ -127,7 +120,6 @@ namespace DumbCalculator
 									Stack.Push(second / top);
 								}
 							};
-							nextOp();
 							break;
 						case "dump":
 							nextOp = () =>
@@ -143,7 +135,6 @@ namespace DumbCalculator
 									Console.WriteLine("	{0}", value);
 								}
 							};
-							nextOp();
 							break;
 						case "q":
 							nextOp = () =>
@@ -152,14 +143,13 @@ namespace DumbCalculator
 								Console.ReadLine();
 								quitting = true;
 							};
-							nextOp();
 							break;
 						default:
 							nextOp = () => Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
-							nextOp();
 							break;
 					}
 				}
+				nextOp();
 			}
 		}
 	}
