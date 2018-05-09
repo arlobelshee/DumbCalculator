@@ -29,36 +29,17 @@ namespace DumbCalculator
 				Console.Write("> ");
 				var input = Console.ReadLine().Trim();
 				var parsedSuccessfully = false;
-				if (decimal.TryParse(input, out decimal number))
-				{
-					parsedSuccessfully = true;
-					Stack.Push(number);
-				}
+				parsedSuccessfully = HandleNumberIfPresent(input, parsedSuccessfully);
 				if (parsedSuccessfully)
 				{
 					continue;
 				}
-				if (input.StartsWith("="))
-				{
-					parsedSuccessfully = true;
-					if (Stack.Count == 0)
-					{
-						Console.WriteLine("Nothing to store! Variable unaltered.");
-					}
-					else
-					{
-						Variables[input.Substring(1)] = Stack.Pop();
-					}
-				}
+				parsedSuccessfully = HandleVariableAssignIfPresent(input, parsedSuccessfully);
 				if (parsedSuccessfully)
 				{
 					continue;
 				}
-				if (input.StartsWith("$"))
-				{
-					parsedSuccessfully = true;
-					Stack.Push(Variables[input.Substring(1)]);
-				}
+				parsedSuccessfully = HandleVariableReferenceIfPresent(input, parsedSuccessfully);
 				if (parsedSuccessfully)
 				{
 					continue;
@@ -144,6 +125,43 @@ namespace DumbCalculator
 						break;
 				}
 			}
+		}
+
+		private static bool HandleVariableReferenceIfPresent(string input, bool parsedSuccessfully)
+		{
+			if (input.StartsWith("$"))
+			{
+				parsedSuccessfully = true;
+				Stack.Push(Variables[input.Substring(1)]);
+			}
+			return parsedSuccessfully;
+		}
+
+		private static bool HandleVariableAssignIfPresent(string input, bool parsedSuccessfully)
+		{
+			if (input.StartsWith("="))
+			{
+				parsedSuccessfully = true;
+				if (Stack.Count == 0)
+				{
+					Console.WriteLine("Nothing to store! Variable unaltered.");
+				}
+				else
+				{
+					Variables[input.Substring(1)] = Stack.Pop();
+				}
+			}
+			return parsedSuccessfully;
+		}
+
+		private static bool HandleNumberIfPresent(string input, bool parsedSuccessfully)
+		{
+			if (decimal.TryParse(input, out decimal number))
+			{
+				parsedSuccessfully = true;
+				Stack.Push(number);
+			}
+			return parsedSuccessfully;
 		}
 	}
 }
