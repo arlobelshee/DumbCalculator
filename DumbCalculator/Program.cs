@@ -25,8 +25,12 @@ namespace DumbCalculator
 			{
 				Console.WriteLine(HelpInfo);
 			}
-			Console.WriteLine("Quitting now.");
-			Console.ReadLine();
+			if (input.Trim() == "q")
+			{
+				Console.WriteLine("Quitting now.");
+				Console.ReadLine();
+				return;
+			}
 		}
 	}
 }
