@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DumbCalculator
 {
@@ -15,6 +16,9 @@ namespace DumbCalculator
 	=[name] -> pop the top of the stack and store it into a variable named `name`.
 	$[name] -> retrieve the value of the variable named `name` and push it onto the stack.";
 
+		private static readonly Stack<decimal> Stack = new Stack<decimal>();
+		private static readonly Dictionary<string, decimal> Variables = new Dictionary<string, decimal>();
+
 		private static void Main(string[] args)
 		{
 			Console.WriteLine(
@@ -22,20 +26,26 @@ namespace DumbCalculator
 			while (true)
 			{
 				Console.Write("> ");
-				var input = Console.ReadLine();
-				switch (input.Trim())
-				{
-					case "?":
-						Console.WriteLine(HelpInfo);
-						break;
-					case "q":
-						Console.WriteLine("Quitting now.");
-						Console.ReadLine();
-						return;
-					default:
-						Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
-						break;
-				}
+				var input = Console.ReadLine().Trim();
+				if (input.StartsWith("="))
+					if (Stack.Count == 0)
+						Console.WriteLine("Nothing to store! Variable unaltered.");
+					else
+						Variables[input.Substring(1)] = Stack.Pop();
+				else
+					switch (input)
+					{
+						case "?":
+							Console.WriteLine(HelpInfo);
+							break;
+						case "q":
+							Console.WriteLine("Quitting now.");
+							Console.ReadLine();
+							return;
+						default:
+							Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
+							break;
+					}
 			}
 		}
 	}
