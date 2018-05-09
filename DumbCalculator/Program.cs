@@ -63,7 +63,19 @@ namespace DumbCalculator
 							{
 								var top = Stack.Pop();
 								var second = Stack.Pop();
-								Stack.Push(top + second);
+								Stack.Push(second + top);
+							}
+							break;
+						case "-":
+							if (Stack.Count < 2)
+							{
+								Console.WriteLine("Not enough values to subtract! Please push more onto the stack and try again.");
+							}
+							else
+							{
+								var top = Stack.Pop();
+								var second = Stack.Pop();
+								Stack.Push(second - top);
 							}
 							break;
 						case "dump":
