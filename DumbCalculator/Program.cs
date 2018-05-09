@@ -34,7 +34,8 @@ namespace DumbCalculator
 					parsedSuccessfully = true;
 					Stack.Push(number);
 				}
-				else if (input.StartsWith("="))
+				if(parsedSuccessfully) continue;
+				if (input.StartsWith("="))
 				{
 					parsedSuccessfully = true;
 					if (Stack.Count == 0)
