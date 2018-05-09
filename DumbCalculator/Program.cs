@@ -23,18 +23,19 @@ namespace DumbCalculator
 			{
 				Console.Write("> ");
 				var input = Console.ReadLine();
-				if (input.Trim() == "?")
+				switch (input.Trim())
 				{
-					Console.WriteLine(HelpInfo);
-					continue;
+					case "?":
+						Console.WriteLine(HelpInfo);
+						break;
+					case "q":
+						Console.WriteLine("Quitting now.");
+						Console.ReadLine();
+						return;
+					default:
+						Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
+						break;
 				}
-				if (input.Trim() == "q")
-				{
-					Console.WriteLine("Quitting now.");
-					Console.ReadLine();
-					return;
-				}
-				Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
 			}
 		}
 	}
