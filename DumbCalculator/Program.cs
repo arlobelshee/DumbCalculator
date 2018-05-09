@@ -28,12 +28,15 @@ namespace DumbCalculator
 			{
 				Console.Write("> ");
 				var input = Console.ReadLine().Trim();
+				var parsedSuccessfully = false;
 				if (decimal.TryParse(input, out decimal number))
 				{
+					parsedSuccessfully = true;
 					Stack.Push(number);
 				}
 				else if (input.StartsWith("="))
 				{
+					parsedSuccessfully = true;
 					if (Stack.Count == 0)
 					{
 						Console.WriteLine("Nothing to store! Variable unaltered.");
@@ -45,6 +48,7 @@ namespace DumbCalculator
 				}
 				else if (input.StartsWith("$"))
 				{
+					parsedSuccessfully = true;
 					Stack.Push(Variables[input.Substring(1)]);
 				}
 				else
@@ -52,9 +56,11 @@ namespace DumbCalculator
 					switch (input)
 					{
 						case "?":
+							parsedSuccessfully = true;
 							Console.WriteLine(HelpInfo);
 							break;
 						case "+":
+							parsedSuccessfully = true;
 							if (Stack.Count < 2)
 							{
 								Console.WriteLine("Not enough values to add! Please push more onto the stack and try again.");
@@ -67,6 +73,7 @@ namespace DumbCalculator
 							}
 							break;
 						case "-":
+							parsedSuccessfully = true;
 							if (Stack.Count < 2)
 							{
 								Console.WriteLine("Not enough values to subtract! Please push more onto the stack and try again.");
@@ -79,6 +86,7 @@ namespace DumbCalculator
 							}
 							break;
 						case "*":
+							parsedSuccessfully = true;
 							if (Stack.Count < 2)
 							{
 								Console.WriteLine("Not enough values to multiply! Please push more onto the stack and try again.");
@@ -91,6 +99,7 @@ namespace DumbCalculator
 							}
 							break;
 						case "/":
+							parsedSuccessfully = true;
 							if (Stack.Count < 2)
 							{
 								Console.WriteLine("Not enough values to divide! Please push more onto the stack and try again.");
@@ -103,6 +112,7 @@ namespace DumbCalculator
 							}
 							break;
 						case "dump":
+							parsedSuccessfully = true;
 							Console.WriteLine("Variables:");
 							foreach (var variable in Variables)
 							{
@@ -115,6 +125,7 @@ namespace DumbCalculator
 							}
 							break;
 						case "q":
+							parsedSuccessfully = true;
 							Console.WriteLine("Quitting now.");
 							Console.ReadLine();
 							return;
