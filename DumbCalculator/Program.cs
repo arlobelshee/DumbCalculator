@@ -31,7 +31,8 @@ namespace DumbCalculator
 				Action nextOp;
 				if (decimal.TryParse(input, out decimal number))
 				{
-					Stack.Push(number);
+					nextOp = () => Stack.Push(number);
+					nextOp();
 				}
 				else if (input.StartsWith("="))
 				{
@@ -42,86 +43,120 @@ namespace DumbCalculator
 					}
 					else
 					{
-						Variables[input.Substring(1)] = Stack.Pop();
+						nextOp = () => Variables[input.Substring(1)] = Stack.Pop();
+						nextOp();
 					}
 				}
 				else if (input.StartsWith("$"))
 				{
-					Stack.Push(Variables[input.Substring(1)]);
+					nextOp = () => Stack.Push(Variables[input.Substring(1)]);
+					nextOp();
 				}
 				else
 				{
 					switch (input)
 					{
 						case "?":
-							Console.WriteLine(HelpInfo);
+							nextOp = () => Console.WriteLine(HelpInfo);
+							nextOp();
 							break;
 						case "+":
 							if (Stack.Count < 2)
 							{
-								Console.WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+								nextOp = () => Console.WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+								nextOp();
 							}
 							else
 							{
-								var top = Stack.Pop();
-								var second = Stack.Pop();
-								Stack.Push(second + top);
+								nextOp = () =>
+								{
+									var top = Stack.Pop();
+									var second = Stack.Pop();
+									Stack.Push(second + top);
+								};
+								nextOp();
 							}
 							break;
 						case "-":
 							if (Stack.Count < 2)
 							{
-								Console.WriteLine("Not enough values to subtract! Please push more onto the stack and try again.");
+								nextOp = () => Console.WriteLine(
+									"Not enough values to subtract! Please push more onto the stack and try again.");
+								nextOp();
 							}
 							else
 							{
-								var top = Stack.Pop();
-								var second = Stack.Pop();
-								Stack.Push(second - top);
+								nextOp = () =>
+								{
+									var top = Stack.Pop();
+									var second = Stack.Pop();
+									Stack.Push(second - top);
+								};
+								nextOp();
 							}
 							break;
 						case "*":
 							if (Stack.Count < 2)
 							{
-								Console.WriteLine("Not enough values to multiply! Please push more onto the stack and try again.");
+								nextOp = () => Console.WriteLine(
+									"Not enough values to multiply! Please push more onto the stack and try again.");
+								nextOp();
 							}
 							else
 							{
-								var top = Stack.Pop();
-								var second = Stack.Pop();
-								Stack.Push(second * top);
+								nextOp = () =>
+								{
+									var top = Stack.Pop();
+									var second = Stack.Pop();
+									Stack.Push(second * top);
+								};
+								nextOp();
 							}
 							break;
 						case "/":
 							if (Stack.Count < 2)
 							{
-								Console.WriteLine("Not enough values to divide! Please push more onto the stack and try again.");
+								nextOp = () => Console.WriteLine("Not enough values to divide! Please push more onto the stack and try again.");
+								nextOp();
 							}
 							else
 							{
-								var top = Stack.Pop();
-								var second = Stack.Pop();
-								Stack.Push(second / top);
+								nextOp = () =>
+								{
+									var top = Stack.Pop();
+									var second = Stack.Pop();
+									Stack.Push(second / top);
+								};
+								nextOp();
 							}
 							break;
 						case "dump":
-							Console.WriteLine("Variables:");
-							foreach (var variable in Variables)
+							nextOp = () =>
 							{
-								Console.WriteLine("	{0} := {1}", variable.Key, variable.Value);
-							}
-							Console.WriteLine("Stack");
-							foreach (var value in Stack)
-							{
-								Console.WriteLine("	{0}", value);
-							}
+								Console.WriteLine("Variables:");
+								foreach (var variable in Variables)
+								{
+									Console.WriteLine("	{0} := {1}", variable.Key, variable.Value);
+								}
+								Console.WriteLine("Stack");
+								foreach (var value in Stack)
+								{
+									Console.WriteLine("	{0}", value);
+								}
+							};
+							nextOp();
 							break;
 						case "q":
-							Console.WriteLine("Quitting now.");
-							Console.ReadLine();
+							nextOp = () =>
+							{
+								Console.WriteLine("Quitting now.");
+								Console.ReadLine();
+							};
+							nextOp();
 							return;
 						default:
-							Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
+							nextOp = () => Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
+							nextOp();
 							break;
 					}
 				}
