@@ -29,17 +29,17 @@ namespace DumbCalculator
 				Console.Write("> ");
 				var input = Console.ReadLine().Trim();
 				var parsedSuccessfully = false;
-				parsedSuccessfully = HandleNumberIfPresent(input, parsedSuccessfully);
+				parsedSuccessfully = HandleNumberIfPresent(input);
 				if (parsedSuccessfully)
 				{
 					continue;
 				}
-				parsedSuccessfully = HandleVariableAssignIfPresent(input, parsedSuccessfully);
+				parsedSuccessfully = HandleVariableAssignIfPresent(input);
 				if (parsedSuccessfully)
 				{
 					continue;
 				}
-				parsedSuccessfully = HandleVariableReferenceIfPresent(input, parsedSuccessfully);
+				parsedSuccessfully = HandleVariableReferenceIfPresent(input);
 				if (parsedSuccessfully)
 				{
 					continue;
@@ -127,41 +127,41 @@ namespace DumbCalculator
 			}
 		}
 
-		private static bool HandleVariableReferenceIfPresent(string input, bool parsedSuccessfully)
+		private static bool HandleVariableReferenceIfPresent(string input)
 		{
-			if (input.StartsWith("$"))
+			if (!input.StartsWith("$"))
 			{
-				Stack.Push(Variables[input.Substring(1)]);
-				return true;
+				return false;
 			}
-			return false;
+			Stack.Push(Variables[input.Substring(1)]);
+			return true;
 		}
 
-		private static bool HandleVariableAssignIfPresent(string input, bool parsedSuccessfully)
+		private static bool HandleVariableAssignIfPresent(string input)
 		{
-			if (input.StartsWith("="))
+			if (!input.StartsWith("="))
 			{
-				if (Stack.Count == 0)
-				{
-					Console.WriteLine("Nothing to store! Variable unaltered.");
-				}
-				else
-				{
-					Variables[input.Substring(1)] = Stack.Pop();
-				}
-				return true;
+				return false;
 			}
-			return false;
+			if (Stack.Count == 0)
+			{
+				Console.WriteLine("Nothing to store! Variable unaltered.");
+			}
+			else
+			{
+				Variables[input.Substring(1)] = Stack.Pop();
+			}
+			return true;
 		}
 
-		private static bool HandleNumberIfPresent(string input, bool parsedSuccessfully)
+		private static bool HandleNumberIfPresent(string input)
 		{
-			if (decimal.TryParse(input, out decimal number))
+			if (!decimal.TryParse(input, out decimal number))
 			{
-				Stack.Push(number);
-				return true;
+				return false;
 			}
-			return false;
+			Stack.Push(number);
+			return true;
 		}
 	}
 }
