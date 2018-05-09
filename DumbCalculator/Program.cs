@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Json;
 
 namespace DumbCalculator
 {
@@ -8,6 +9,7 @@ namespace DumbCalculator
 		private const string HelpInfo = @"Supported commands:
 	? -> print this help.
 	q -> quit.
+	dump -> dump the contents of the stack and all variables.
 	[any decimal number] -> push that number onto the stack.
 	+ -> Pop the top 2 items on the stack, add them, push result onto the stack.
 	- -> Pop the top 2 items on the stack, subtract the top from the one under it, push result onto the stack.
@@ -48,6 +50,18 @@ namespace DumbCalculator
 					{
 						case "?":
 							Console.WriteLine(HelpInfo);
+							break;
+						case "dump":
+							Console.WriteLine("Variables:");
+							foreach (var variable in Variables)
+							{
+								Console.WriteLine("	{0} := {1}", variable.Key, variable.Value);
+							}
+							Console.WriteLine("Stack");
+							foreach (var value in Stack)
+							{
+								Console.WriteLine("	{0}", value);
+							}
 							break;
 						case "q":
 							Console.WriteLine("Quitting now.");
