@@ -27,7 +27,11 @@ namespace DumbCalculator
 			{
 				Console.Write("> ");
 				var input = Console.ReadLine().Trim();
-				if (input.StartsWith("="))
+				if (decimal.TryParse(input, out decimal number))
+				{
+					Stack.Push(number);
+				}
+				else if (input.StartsWith("="))
 				{
 					if (Stack.Count == 0)
 					{
