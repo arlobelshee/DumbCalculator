@@ -64,17 +64,11 @@ namespace DumbCalculator
 				{
 					continue;
 				}
-				var parsedSuccessfully = false;
 				if (input == "q")
 				{
-					parsedSuccessfully = true;
 					Console.WriteLine("Quitting now.");
 					Console.ReadLine();
 					return;
-				}
-				if (parsedSuccessfully)
-				{
-					continue;
 				}
 				DisplayParseError();
 			}
