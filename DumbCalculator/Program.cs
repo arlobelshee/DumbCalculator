@@ -29,18 +29,15 @@ namespace DumbCalculator
 				Console.Write("> ");
 				var input = Console.ReadLine().Trim();
 				var parsedSuccessfully = false;
-				parsedSuccessfully = HandleNumberIfPresent(input);
-				if (parsedSuccessfully)
+				if (HandleNumberIfPresent(input))
 				{
 					continue;
 				}
-				parsedSuccessfully = HandleVariableAssignIfPresent(input);
-				if (parsedSuccessfully)
+				if (HandleVariableAssignIfPresent(input))
 				{
 					continue;
 				}
-				parsedSuccessfully = HandleVariableReferenceIfPresent(input);
-				if (parsedSuccessfully)
+				if (HandleVariableReferenceIfPresent(input))
 				{
 					continue;
 				}
