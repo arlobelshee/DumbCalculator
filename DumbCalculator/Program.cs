@@ -90,7 +90,7 @@ namespace DumbCalculator
 		{
 			if (input != "?")
 			{
-				return parsedSuccessfully;
+				return false;
 			}
 			Console.WriteLine(HelpInfo);
 			return true;
@@ -100,7 +100,7 @@ namespace DumbCalculator
 		{
 			if (input != "+")
 			{
-				return parsedSuccessfully;
+				return false;
 			}
 			if (Stack.Count < 2)
 			{
@@ -119,7 +119,7 @@ namespace DumbCalculator
 		{
 			if (input != "-")
 			{
-				return parsedSuccessfully;
+				return false;
 			}
 			if (Stack.Count < 2)
 			{
@@ -138,7 +138,7 @@ namespace DumbCalculator
 		{
 			if (input != "*")
 			{
-				return parsedSuccessfully;
+				return false;
 			}
 			if (Stack.Count < 2)
 			{
@@ -157,7 +157,7 @@ namespace DumbCalculator
 		{
 			if (input != "/")
 			{
-				return parsedSuccessfully;
+				return false;
 			}
 			if (Stack.Count < 2)
 			{
@@ -176,7 +176,7 @@ namespace DumbCalculator
 		{
 			if (input != "dump")
 			{
-				return parsedSuccessfully;
+				return false;
 			}
 			Console.WriteLine("Variables:");
 			foreach (var variable in Variables)
