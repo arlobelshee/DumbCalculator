@@ -92,6 +92,7 @@ namespace DumbCalculator
 			{
 				parsedSuccessfully = true;
 				Console.WriteLine(HelpInfo);
+				return parsedSuccessfully;
 			}
 			return parsedSuccessfully;
 		}
@@ -111,6 +112,7 @@ namespace DumbCalculator
 					var second = Stack.Pop();
 					Stack.Push(second + top);
 				}
+				return parsedSuccessfully;
 			}
 			return parsedSuccessfully;
 		}
@@ -130,6 +132,7 @@ namespace DumbCalculator
 					var second = Stack.Pop();
 					Stack.Push(second - top);
 				}
+				return parsedSuccessfully;
 			}
 			return parsedSuccessfully;
 		}
@@ -149,6 +152,7 @@ namespace DumbCalculator
 					var second = Stack.Pop();
 					Stack.Push(second * top);
 				}
+				return parsedSuccessfully;
 			}
 			return parsedSuccessfully;
 		}
@@ -168,6 +172,7 @@ namespace DumbCalculator
 					var second = Stack.Pop();
 					Stack.Push(second / top);
 				}
+				return parsedSuccessfully;
 			}
 			return parsedSuccessfully;
 		}
@@ -187,6 +192,7 @@ namespace DumbCalculator
 				{
 					Console.WriteLine("	{0}", value);
 				}
+				return parsedSuccessfully;
 			}
 			return parsedSuccessfully;
 		}
