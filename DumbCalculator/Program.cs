@@ -41,101 +41,32 @@ namespace DumbCalculator
 				{
 					continue;
 				}
-				if (input == "?")
-				{
-					parsedSuccessfully = true;
-					Console.WriteLine(HelpInfo);
-				}
+				parsedSuccessfully = HandleRequestForHelpIfPresent(input, parsedSuccessfully);
 				if (parsedSuccessfully)
 				{
 					continue;
 				}
-				if (input == "+")
-				{
-					parsedSuccessfully = true;
-					if (Stack.Count < 2)
-					{
-						Console.WriteLine("Not enough values to add! Please push more onto the stack and try again.");
-					}
-					else
-					{
-						var top = Stack.Pop();
-						var second = Stack.Pop();
-						Stack.Push(second + top);
-					}
-				}
+				parsedSuccessfully = HandleAdditionIfPresent(input, parsedSuccessfully);
 				if (parsedSuccessfully)
 				{
 					continue;
 				}
-				if (input == "-")
-				{
-					parsedSuccessfully = true;
-					if (Stack.Count < 2)
-					{
-						Console.WriteLine("Not enough values to subtract! Please push more onto the stack and try again.");
-					}
-					else
-					{
-						var top = Stack.Pop();
-						var second = Stack.Pop();
-						Stack.Push(second - top);
-					}
-				}
+				parsedSuccessfully = HandleSubtractionIfPresent(input, parsedSuccessfully);
 				if (parsedSuccessfully)
 				{
 					continue;
 				}
-				if (input == "*")
-				{
-					parsedSuccessfully = true;
-					if (Stack.Count < 2)
-					{
-						Console.WriteLine("Not enough values to multiply! Please push more onto the stack and try again.");
-					}
-					else
-					{
-						var top = Stack.Pop();
-						var second = Stack.Pop();
-						Stack.Push(second * top);
-					}
-				}
+				parsedSuccessfully = HandleMultiplicationIfPresent(input, parsedSuccessfully);
 				if (parsedSuccessfully)
 				{
 					continue;
 				}
-				if (input == "/")
-				{
-					parsedSuccessfully = true;
-					if (Stack.Count < 2)
-					{
-						Console.WriteLine("Not enough values to divide! Please push more onto the stack and try again.");
-					}
-					else
-					{
-						var top = Stack.Pop();
-						var second = Stack.Pop();
-						Stack.Push(second / top);
-					}
-				}
+				parsedSuccessfully = HandleDivisionIfPresent(input, parsedSuccessfully);
 				if (parsedSuccessfully)
 				{
 					continue;
 				}
-				if (input == "dump")
-				{
-					parsedSuccessfully = true;
-					Console.WriteLine("Variables:");
-					foreach (var variable in Variables)
-					{
-						Console.WriteLine("	{0} := {1}", variable.Key, variable.Value);
-					}
-					Console.WriteLine("Stack");
-					foreach (var value in Stack)
-					{
-						Console.WriteLine("	{0}", value);
-					}
-				}
+				parsedSuccessfully = HandleDumpIfPresent(input, parsedSuccessfully);
 				if (parsedSuccessfully)
 				{
 					continue;
@@ -151,8 +82,118 @@ namespace DumbCalculator
 				{
 					continue;
 				}
-				Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
+				DisplayParseError();
 			}
+		}
+
+		private static bool HandleRequestForHelpIfPresent(string input, bool parsedSuccessfully)
+		{
+			if (input == "?")
+			{
+				parsedSuccessfully = true;
+				Console.WriteLine(HelpInfo);
+			}
+			return parsedSuccessfully;
+		}
+
+		private static bool HandleAdditionIfPresent(string input, bool parsedSuccessfully)
+		{
+			if (input == "+")
+			{
+				parsedSuccessfully = true;
+				if (Stack.Count < 2)
+				{
+					Console.WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+				}
+				else
+				{
+					var top = Stack.Pop();
+					var second = Stack.Pop();
+					Stack.Push(second + top);
+				}
+			}
+			return parsedSuccessfully;
+		}
+
+		private static bool HandleSubtractionIfPresent(string input, bool parsedSuccessfully)
+		{
+			if (input == "-")
+			{
+				parsedSuccessfully = true;
+				if (Stack.Count < 2)
+				{
+					Console.WriteLine("Not enough values to subtract! Please push more onto the stack and try again.");
+				}
+				else
+				{
+					var top = Stack.Pop();
+					var second = Stack.Pop();
+					Stack.Push(second - top);
+				}
+			}
+			return parsedSuccessfully;
+		}
+
+		private static bool HandleMultiplicationIfPresent(string input, bool parsedSuccessfully)
+		{
+			if (input == "*")
+			{
+				parsedSuccessfully = true;
+				if (Stack.Count < 2)
+				{
+					Console.WriteLine("Not enough values to multiply! Please push more onto the stack and try again.");
+				}
+				else
+				{
+					var top = Stack.Pop();
+					var second = Stack.Pop();
+					Stack.Push(second * top);
+				}
+			}
+			return parsedSuccessfully;
+		}
+
+		private static bool HandleDivisionIfPresent(string input, bool parsedSuccessfully)
+		{
+			if (input == "/")
+			{
+				parsedSuccessfully = true;
+				if (Stack.Count < 2)
+				{
+					Console.WriteLine("Not enough values to divide! Please push more onto the stack and try again.");
+				}
+				else
+				{
+					var top = Stack.Pop();
+					var second = Stack.Pop();
+					Stack.Push(second / top);
+				}
+			}
+			return parsedSuccessfully;
+		}
+
+		private static bool HandleDumpIfPresent(string input, bool parsedSuccessfully)
+		{
+			if (input == "dump")
+			{
+				parsedSuccessfully = true;
+				Console.WriteLine("Variables:");
+				foreach (var variable in Variables)
+				{
+					Console.WriteLine("	{0} := {1}", variable.Key, variable.Value);
+				}
+				Console.WriteLine("Stack");
+				foreach (var value in Stack)
+				{
+					Console.WriteLine("	{0}", value);
+				}
+			}
+			return parsedSuccessfully;
+		}
+
+		private static void DisplayParseError()
+		{
+			Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
 		}
 
 		private static bool HandleVariableReferenceIfPresent(string input)
