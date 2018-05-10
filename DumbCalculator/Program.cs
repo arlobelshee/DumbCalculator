@@ -46,7 +46,11 @@ namespace DumbCalculator
 					parsedSuccessfully = true;
 					Console.WriteLine(HelpInfo);
 				}
-				else if (input == "+")
+				if (parsedSuccessfully)
+				{
+					continue;
+				}
+				if (input == "+")
 				{
 					parsedSuccessfully = true;
 					if (Stack.Count < 2)
@@ -60,7 +64,11 @@ namespace DumbCalculator
 						Stack.Push(second + top);
 					}
 				}
-				else if (input == "-")
+				if (parsedSuccessfully)
+				{
+					continue;
+				}
+				if (input == "-")
 				{
 					parsedSuccessfully = true;
 					if (Stack.Count < 2)
@@ -74,7 +82,11 @@ namespace DumbCalculator
 						Stack.Push(second - top);
 					}
 				}
-				else if (input == "*")
+				if (parsedSuccessfully)
+				{
+					continue;
+				}
+				if (input == "*")
 				{
 					parsedSuccessfully = true;
 					if (Stack.Count < 2)
@@ -88,7 +100,11 @@ namespace DumbCalculator
 						Stack.Push(second * top);
 					}
 				}
-				else if (input == "/")
+				if (parsedSuccessfully)
+				{
+					continue;
+				}
+				if (input == "/")
 				{
 					parsedSuccessfully = true;
 					if (Stack.Count < 2)
@@ -102,7 +118,11 @@ namespace DumbCalculator
 						Stack.Push(second / top);
 					}
 				}
-				else if (input == "dump")
+				if (parsedSuccessfully)
+				{
+					continue;
+				}
+				if (input == "dump")
 				{
 					parsedSuccessfully = true;
 					Console.WriteLine("Variables:");
@@ -116,17 +136,22 @@ namespace DumbCalculator
 						Console.WriteLine("	{0}", value);
 					}
 				}
-				else if (input == "q")
+				if (parsedSuccessfully)
+				{
+					continue;
+				}
+				if (input == "q")
 				{
 					parsedSuccessfully = true;
 					Console.WriteLine("Quitting now.");
 					Console.ReadLine();
 					return;
 				}
-				else
+				if (parsedSuccessfully)
 				{
-					Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
+					continue;
 				}
+				Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
 			}
 		}
 
