@@ -28,7 +28,6 @@ namespace DumbCalculator
 			{
 				Console.Write("> ");
 				var input = Console.ReadLine().Trim();
-				var parsedSuccessfully = false;
 				if (HandleNumberIfPresent(input))
 				{
 					continue;
@@ -41,36 +40,31 @@ namespace DumbCalculator
 				{
 					continue;
 				}
-				parsedSuccessfully = HandleRequestForHelpIfPresent(input, parsedSuccessfully);
-				if (parsedSuccessfully)
+				if (HandleRequestForHelpIfPresent(input))
 				{
 					continue;
 				}
-				parsedSuccessfully = HandleAdditionIfPresent(input, parsedSuccessfully);
-				if (parsedSuccessfully)
+				if (HandleAdditionIfPresent(input))
 				{
 					continue;
 				}
-				parsedSuccessfully = HandleSubtractionIfPresent(input, parsedSuccessfully);
-				if (parsedSuccessfully)
+				if (HandleSubtractionIfPresent(input))
 				{
 					continue;
 				}
-				parsedSuccessfully = HandleMultiplicationIfPresent(input, parsedSuccessfully);
-				if (parsedSuccessfully)
+				if (HandleMultiplicationIfPresent(input))
 				{
 					continue;
 				}
-				parsedSuccessfully = HandleDivisionIfPresent(input, parsedSuccessfully);
-				if (parsedSuccessfully)
+				if (HandleDivisionIfPresent(input))
 				{
 					continue;
 				}
-				parsedSuccessfully = HandleDumpIfPresent(input, parsedSuccessfully);
-				if (parsedSuccessfully)
+				if (HandleDumpIfPresent(input))
 				{
 					continue;
 				}
+				var parsedSuccessfully = false;
 				if (input == "q")
 				{
 					parsedSuccessfully = true;
@@ -86,7 +80,7 @@ namespace DumbCalculator
 			}
 		}
 
-		private static bool HandleRequestForHelpIfPresent(string input, bool parsedSuccessfully)
+		private static bool HandleRequestForHelpIfPresent(string input)
 		{
 			if (input != "?")
 			{
@@ -96,7 +90,7 @@ namespace DumbCalculator
 			return true;
 		}
 
-		private static bool HandleAdditionIfPresent(string input, bool parsedSuccessfully)
+		private static bool HandleAdditionIfPresent(string input)
 		{
 			if (input != "+")
 			{
@@ -115,7 +109,7 @@ namespace DumbCalculator
 			return true;
 		}
 
-		private static bool HandleSubtractionIfPresent(string input, bool parsedSuccessfully)
+		private static bool HandleSubtractionIfPresent(string input)
 		{
 			if (input != "-")
 			{
@@ -134,7 +128,7 @@ namespace DumbCalculator
 			return true;
 		}
 
-		private static bool HandleMultiplicationIfPresent(string input, bool parsedSuccessfully)
+		private static bool HandleMultiplicationIfPresent(string input)
 		{
 			if (input != "*")
 			{
@@ -153,7 +147,7 @@ namespace DumbCalculator
 			return true;
 		}
 
-		private static bool HandleDivisionIfPresent(string input, bool parsedSuccessfully)
+		private static bool HandleDivisionIfPresent(string input)
 		{
 			if (input != "/")
 			{
@@ -172,7 +166,7 @@ namespace DumbCalculator
 			return true;
 		}
 
-		private static bool HandleDumpIfPresent(string input, bool parsedSuccessfully)
+		private static bool HandleDumpIfPresent(string input)
 		{
 			if (input != "dump")
 			{
