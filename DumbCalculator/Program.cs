@@ -41,85 +41,91 @@ namespace DumbCalculator
 				{
 					continue;
 				}
-				switch (input)
+				if (input == "?")
 				{
-					case "?":
-						parsedSuccessfully = true;
-						Console.WriteLine(HelpInfo);
-						break;
-					case "+":
-						parsedSuccessfully = true;
-						if (Stack.Count < 2)
-						{
-							Console.WriteLine("Not enough values to add! Please push more onto the stack and try again.");
-						}
-						else
-						{
-							var top = Stack.Pop();
-							var second = Stack.Pop();
-							Stack.Push(second + top);
-						}
-						break;
-					case "-":
-						parsedSuccessfully = true;
-						if (Stack.Count < 2)
-						{
-							Console.WriteLine("Not enough values to subtract! Please push more onto the stack and try again.");
-						}
-						else
-						{
-							var top = Stack.Pop();
-							var second = Stack.Pop();
-							Stack.Push(second - top);
-						}
-						break;
-					case "*":
-						parsedSuccessfully = true;
-						if (Stack.Count < 2)
-						{
-							Console.WriteLine("Not enough values to multiply! Please push more onto the stack and try again.");
-						}
-						else
-						{
-							var top = Stack.Pop();
-							var second = Stack.Pop();
-							Stack.Push(second * top);
-						}
-						break;
-					case "/":
-						parsedSuccessfully = true;
-						if (Stack.Count < 2)
-						{
-							Console.WriteLine("Not enough values to divide! Please push more onto the stack and try again.");
-						}
-						else
-						{
-							var top = Stack.Pop();
-							var second = Stack.Pop();
-							Stack.Push(second / top);
-						}
-						break;
-					case "dump":
-						parsedSuccessfully = true;
-						Console.WriteLine("Variables:");
-						foreach (var variable in Variables)
-						{
-							Console.WriteLine("	{0} := {1}", variable.Key, variable.Value);
-						}
-						Console.WriteLine("Stack");
-						foreach (var value in Stack)
-						{
-							Console.WriteLine("	{0}", value);
-						}
-						break;
-					case "q":
-						parsedSuccessfully = true;
-						Console.WriteLine("Quitting now.");
-						Console.ReadLine();
-						return;
-					default:
-						Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
-						break;
+					parsedSuccessfully = true;
+					Console.WriteLine(HelpInfo);
+				}
+				else if (input == "+")
+				{
+					parsedSuccessfully = true;
+					if (Stack.Count < 2)
+					{
+						Console.WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+					}
+					else
+					{
+						var top = Stack.Pop();
+						var second = Stack.Pop();
+						Stack.Push(second + top);
+					}
+				}
+				else if (input == "-")
+				{
+					parsedSuccessfully = true;
+					if (Stack.Count < 2)
+					{
+						Console.WriteLine("Not enough values to subtract! Please push more onto the stack and try again.");
+					}
+					else
+					{
+						var top = Stack.Pop();
+						var second = Stack.Pop();
+						Stack.Push(second - top);
+					}
+				}
+				else if (input == "*")
+				{
+					parsedSuccessfully = true;
+					if (Stack.Count < 2)
+					{
+						Console.WriteLine("Not enough values to multiply! Please push more onto the stack and try again.");
+					}
+					else
+					{
+						var top = Stack.Pop();
+						var second = Stack.Pop();
+						Stack.Push(second * top);
+					}
+				}
+				else if (input == "/")
+				{
+					parsedSuccessfully = true;
+					if (Stack.Count < 2)
+					{
+						Console.WriteLine("Not enough values to divide! Please push more onto the stack and try again.");
+					}
+					else
+					{
+						var top = Stack.Pop();
+						var second = Stack.Pop();
+						Stack.Push(second / top);
+					}
+				}
+				else if (input == "dump")
+				{
+					parsedSuccessfully = true;
+					Console.WriteLine("Variables:");
+					foreach (var variable in Variables)
+					{
+						Console.WriteLine("	{0} := {1}", variable.Key, variable.Value);
+					}
+					Console.WriteLine("Stack");
+					foreach (var value in Stack)
+					{
+						Console.WriteLine("	{0}", value);
+					}
+				}
+				else if (input == "q")
+				{
+					parsedSuccessfully = true;
+					Console.WriteLine("Quitting now.");
+					Console.ReadLine();
+					return;
+				}
+				else
+				{
+					Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
 				}
 			}
 		}
