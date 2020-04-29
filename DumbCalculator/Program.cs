@@ -35,6 +35,10 @@ namespace DumbCalculator
 				{
 					Stack.Push(number);
 				}
+				else if (input.StartsWith("def "))
+				{
+					new FormulaDefinition(input.Substring(4));
+				}
 				else if (input.StartsWith("="))
 				{
 					if (Stack.Count == 0)
