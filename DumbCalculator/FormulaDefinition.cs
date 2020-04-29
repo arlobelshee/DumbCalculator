@@ -2,11 +2,11 @@
 {
     internal class FormulaDefinition
     {
-        private string v;
+        private string _name;
 
-        public FormulaDefinition(string v)
+        public FormulaDefinition(string name)
         {
-            this.v = v;
+            _name = name;
         }
     }
 }
