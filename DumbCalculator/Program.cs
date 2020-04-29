@@ -15,7 +15,10 @@ namespace DumbCalculator
 	* -> Pop the top 2 items on the stack, multiply them, push result onto the stack.
 	/ -> Pop the top 2 items on the stack, divide the top into the one under it, push result onto the stack.
 	=[name] -> pop the top of the stack and store it into a variable named `name`.
-	$[name] -> retrieve the value of the variable named `name` and push it onto the stack.";
+	$[name] -> retrieve the value of the variable named `name` and push it onto the stack.
+	def [name] -> begin defining a formula that you can later call.
+	end formula -> stop defining a formula. Return state to what it was when defining started.
+	call [name] -> execute a formula.";
 
 		private static readonly Stack<decimal> Stack = new Stack<decimal>();
 		private static readonly Dictionary<string, decimal> Variables = new Dictionary<string, decimal>();
