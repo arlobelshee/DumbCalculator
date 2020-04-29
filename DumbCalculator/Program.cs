@@ -22,6 +22,7 @@ namespace DumbCalculator
 
 		private static readonly Stack<decimal> Stack = new Stack<decimal>();
 		private static readonly Dictionary<string, decimal> Variables = new Dictionary<string, decimal>();
+		private static FormulaDefinition formulaBeingDefined = null;
 
 		private static void Main(string[] args)
 		{
@@ -37,7 +38,7 @@ namespace DumbCalculator
 				}
 				else if (input.StartsWith("def "))
 				{
-					new FormulaDefinition(input.Substring(4));
+					formulaBeingDefined = new FormulaDefinition(input.Substring(4));
 				}
 				else if (input.StartsWith("="))
 				{
