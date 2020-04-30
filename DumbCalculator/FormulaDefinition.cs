@@ -1,4 +1,7 @@
-﻿namespace DumbCalculator
+﻿using System;
+using System.Collections.Generic;
+
+namespace DumbCalculator
 {
     internal class FormulaDefinition
     {
@@ -7,6 +10,10 @@
         public FormulaDefinition(string name)
         {
             _name = name;
+        }
+
+        internal void AddTo(Dictionary<string, FormulaDefinition> formulas)
+        {
         }
     }
 }
