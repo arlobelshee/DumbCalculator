@@ -14,6 +14,7 @@ namespace DumbCalculator
 
         internal void AddTo(Dictionary<string, FormulaDefinition> formulas)
         {
+            formulas[_name] = this;
         }
     }
 }
