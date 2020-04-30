@@ -43,8 +43,15 @@ namespace DumbCalculator
 				}
 				else if (input.Equals("end formula"))
 				{
-					formulaBeingDefined.AddTo(formulas);
-					formulaBeingDefined = null;
+					if (null == formulaBeingDefined)
+					{ 
+						Console.WriteLine("No formula to end! Everything is unaltered.");
+					}
+					else
+					{
+						formulaBeingDefined.AddTo(formulas);
+						formulaBeingDefined = null;
+					}
 				}
 				else if (input.StartsWith("="))
 				{
