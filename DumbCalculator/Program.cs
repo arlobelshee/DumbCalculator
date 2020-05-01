@@ -22,6 +22,8 @@ namespace DumbCalculator
 
 		private static readonly Stack<decimal> Stack = new Stack<decimal>();
 		private static readonly Dictionary<string, decimal> Variables = new Dictionary<string, decimal>();
+		private static FormulaDefinition formulaBeingDefined = null;
+		private static readonly Dictionary<string, FormulaDefinition> formulas;
 
 		private static void Main(string[] args)
 		{
@@ -34,6 +36,22 @@ namespace DumbCalculator
 				if (decimal.TryParse(input, out decimal number))
 				{
 					Stack.Push(number);
+				}
+				else if (input.StartsWith("def "))
+				{
+					formulaBeingDefined = new FormulaDefinition(input.Substring(4));
+				}
+				else if (input.Equals("end formula"))
+				{
+					if (null == formulaBeingDefined)
+					{ 
+						Console.WriteLine("No formula to end! Everything is unaltered.");
+					}
+					else
+					{
+						formulaBeingDefined.AddTo(formulas);
+						formulaBeingDefined = null;
+					}
 				}
 				else if (input.StartsWith("="))
 				{
