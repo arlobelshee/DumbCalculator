@@ -129,6 +129,7 @@ namespace DumbCalculator
                             {
                                 foreach (var formula in formulas.Values)
                                 {
+                                    formula.PrintTo(output);
                                 }
                             }
                             Console.WriteLine("Variables:");
