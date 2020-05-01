@@ -8,7 +8,7 @@ namespace DumbCalculator
         private const string HelpInfo = @"Supported commands:
 	? -> print this help.
 	q -> quit.
-	dump -> dump the contents of the stack and all variables.
+	dump -> dump the contents of the stack and all variables and functions.
 	[any decimal number] -> push that number onto the stack.
 	+ -> Pop the top 2 items on the stack, add them, push result onto the stack.
 	- -> Pop the top 2 items on the stack, subtract the top from the one under it, push result onto the stack.
@@ -124,6 +124,7 @@ namespace DumbCalculator
                             }
                             break;
                         case "dump":
+                            Console.WriteLine("Functions:");
                             Console.WriteLine("Variables:");
                             foreach (var variable in Variables)
                             {
