@@ -125,9 +125,9 @@ namespace DumbCalculator
                             break;
                         case "dump":
                             Console.WriteLine("Functions:");
-                            foreach (var formula in formulas.Values)
+                            using (System.IO.Stream output = Console.OpenStandardOutput())
                             {
-                                using (System.IO.Stream output = Console.OpenStandardOutput())
+                                foreach (var formula in formulas.Values)
                                 {
                                 }
                             }
