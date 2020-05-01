@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace DumbCalculator
 {
@@ -15,6 +16,10 @@ namespace DumbCalculator
         internal void AddTo(Dictionary<string, FormulaDefinition> formulas)
         {
             formulas[_name] = this;
+        }
+
+        internal void PrintTo(Stream output)
+        {
         }
     }
 }
