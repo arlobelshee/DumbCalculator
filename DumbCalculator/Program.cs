@@ -127,6 +127,9 @@ namespace DumbCalculator
                             Console.WriteLine("Functions:");
                             foreach (var formula in formulas.Values)
                             {
+                                using (System.IO.Stream output = Console.OpenStandardOutput())
+                                {
+                                }
                             }
                             Console.WriteLine("Variables:");
                             foreach (var variable in Variables)
