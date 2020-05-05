@@ -14,6 +14,7 @@ namespace DumbCalculator
 	- -> Pop the top 2 items on the stack, subtract the top from the one under it, push result onto the stack.
 	* -> Pop the top 2 items on the stack, multiply them, push result onto the stack.
 	/ -> Pop the top 2 items on the stack, divide the top into the one under it, push result onto the stack.
+	^ -> Pop the top 2 items on the stack, raise the top to the power of the one under it, push result onto the stack.
 	=[name] -> pop the top of the stack and store it into a variable named `name`.
 	$[name] -> retrieve the value of the variable named `name` and push it onto the stack.
 	def [name] -> begin defining a formula that you can later call.
@@ -75,12 +76,14 @@ namespace DumbCalculator
                         case "?":
                             Console.WriteLine(HelpInfo);
                             break;
-                        case "+":
-                            if (Stack.Count < 2)
+                        case "^":
                             {
-                                Console.WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+                                var top = Stack.Pop();
+                                var second = Stack.Pop();
+                                Stack.Push((decimal)Math.Pow((double)top, (double)second));
                             }
-                            else
+                            break;
+                        case "+":
                             {
                                 var top = Stack.Pop();
                                 var second = Stack.Pop();
@@ -88,11 +91,6 @@ namespace DumbCalculator
                             }
                             break;
                         case "-":
-                            if (Stack.Count < 2)
-                            {
-                                Console.WriteLine("Not enough values to subtract! Please push more onto the stack and try again.");
-                            }
-                            else
                             {
                                 var top = Stack.Pop();
                                 var second = Stack.Pop();
@@ -100,11 +98,6 @@ namespace DumbCalculator
                             }
                             break;
                         case "*":
-                            if (Stack.Count < 2)
-                            {
-                                Console.WriteLine("Not enough values to multiply! Please push more onto the stack and try again.");
-                            }
-                            else
                             {
                                 var top = Stack.Pop();
                                 var second = Stack.Pop();
@@ -112,11 +105,6 @@ namespace DumbCalculator
                             }
                             break;
                         case "/":
-                            if (Stack.Count < 2)
-                            {
-                                Console.WriteLine("Not enough values to divide! Please push more onto the stack and try again.");
-                            }
-                            else
                             {
                                 var top = Stack.Pop();
                                 var second = Stack.Pop();
