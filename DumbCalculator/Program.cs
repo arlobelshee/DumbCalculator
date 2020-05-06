@@ -78,32 +78,27 @@ namespace DumbCalculator
                             break;
                         case "^":
                             {
-                                Func<decimal, decimal, decimal> computation = (x, y) => (decimal)Math.Pow((double)x, (double)y);
-                                DoBinaryOperation(computation);
+                                DoBinaryOperation((x, y) => (decimal)Math.Pow((double)x, (double)y));
                             }
                             break;
                         case "+":
                             {
-                                Func<decimal, decimal, decimal> computation = (x, y) => x + y;
-                                DoBinaryOperation(computation);
+                                DoBinaryOperation((x, y) => x + y);
                             }
                             break;
                         case "-":
                             {
-                                Func<decimal, decimal, decimal> computation = (x, y) => x - y;
-                                DoBinaryOperation(computation);
+                                DoBinaryOperation((x, y) => x - y);
                             }
                             break;
                         case "*":
                             {
-                                Func<decimal, decimal, decimal> computation = (x, y) => x * y;
-                                DoBinaryOperation(computation);
+                                DoBinaryOperation((x, y) => x * y);
                             }
                             break;
                         case "/":
                             {
-                                Func<decimal, decimal, decimal> computation = (x, y) => x / y;
-                                DoBinaryOperation(computation);
+                                DoBinaryOperation((x, y) => x / y);
                             }
                             break;
                         case "dump":
