@@ -1,12 +1,18 @@
-﻿namespace DumbCalculator
+﻿using System.Collections.Generic;
+
+namespace DumbCalculator
 {
     internal class FormulaDefinition
     {
-        private string v;
+        private readonly Dictionary<string, decimal> _initialVariables;
+        private readonly Stack<decimal> _initialStack;
+        private readonly string _name;
 
-        public FormulaDefinition(string v)
+        public FormulaDefinition(string name, Stack<decimal> initialStack, Dictionary<string, decimal> initialVariables)
         {
-            this.v = v;
+            _name = name;
+            _initialStack = initialStack;
+            _initialVariables = initialVariables;
         }
     }
 }
