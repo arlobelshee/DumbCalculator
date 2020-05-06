@@ -19,6 +19,15 @@ namespace DumbCalculator.Tests
         }
 
         [Fact]
+        public void BinaryOperationWithOnlyOneArg()
+        {
+            Program.Stack.Clear();
+            Program.ProcessOneInput(lhs.ToString());
+            Program.ProcessOneInput("+");
+            Program.Stack.Should().BeEquivalentTo(lhs);
+        }
+
+        [Fact]
         public void Add()
         {
             Program.Stack.Clear();

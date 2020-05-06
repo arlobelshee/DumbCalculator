@@ -140,6 +140,11 @@ namespace DumbCalculator
 
         private static void PerformBinaryOperation(Func<decimal, decimal, decimal> calculation)
         {
+            if(Stack.Count < 2)
+            {
+                Console.WriteLine("This operation requires 2 or more arguments. Please push more values onto the stack and try again.");
+                return;
+            }
             var top = Stack.Pop();
             var second = Stack.Pop();
             Stack.Push(calculation(second, top));
