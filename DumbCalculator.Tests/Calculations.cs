@@ -26,5 +26,35 @@ namespace DumbCalculator.Tests
             Program.ProcessOneInput("+");
             Program.Stack.Should().BeEquivalentTo(lhs + rhs);
         }
+
+        [Fact]
+        public void Subtract()
+        {
+            Program.Stack.Clear();
+            Program.ProcessOneInput(lhs.ToString());
+            Program.ProcessOneInput(rhs.ToString());
+            Program.ProcessOneInput("-");
+            Program.Stack.Should().BeEquivalentTo(lhs - rhs);
+        }
+
+        [Fact]
+        public void Multiply()
+        {
+            Program.Stack.Clear();
+            Program.ProcessOneInput(lhs.ToString());
+            Program.ProcessOneInput(rhs.ToString());
+            Program.ProcessOneInput("*");
+            Program.Stack.Should().BeEquivalentTo(lhs * rhs);
+        }
+
+        [Fact]
+        public void Divide()
+        {
+            Program.Stack.Clear();
+            Program.ProcessOneInput(lhs.ToString());
+            Program.ProcessOneInput(rhs.ToString());
+            Program.ProcessOneInput("/");
+            Program.Stack.Should().BeEquivalentTo(lhs / rhs);
+        }
 	}
 }
