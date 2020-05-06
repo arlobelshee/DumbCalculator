@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DumbCalculator
 {
@@ -14,5 +15,11 @@ namespace DumbCalculator
             _initialStack = initialStack;
             _initialVariables = initialVariables;
         }
+
+        public Stack<decimal> InitialStack => _initialStack;
+
+        public Dictionary<string, decimal> InitialVariables => _initialVariables;
+
+        public string Name => _name;
     }
 }

@@ -23,6 +23,7 @@ namespace DumbCalculator
 		private static Stack<decimal> Stack = new Stack<decimal>();
 		private static Dictionary<string, decimal> Variables = new Dictionary<string, decimal>();
 		private static FormulaDefinition formulaBeingDefined = null;
+		private static Dictionary<string, FormulaDefinition> formulas = new Dictionary<string, FormulaDefinition>();
 
 		private static void Main(string[] args)
 		{
@@ -63,6 +64,12 @@ namespace DumbCalculator
 					{
 						case "?":
 							Console.WriteLine(HelpInfo);
+							break;
+						case "end formula":
+							formulas[formulaBeingDefined.Name] = formulaBeingDefined;
+							Stack = formulaBeingDefined.InitialStack;
+							Variables = formulaBeingDefined.InitialVariables;
+							formulaBeingDefined = null;
 							break;
 						case "+":
 							if (Stack.Count < 2)
