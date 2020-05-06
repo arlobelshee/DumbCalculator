@@ -91,9 +91,10 @@ namespace DumbCalculator
                         break;
                     case "+":
                         {
+                            Func<decimal, decimal, decimal> calculation = (lhs, rhs) => lhs + rhs;
                             var top = Stack.Pop();
                             var second = Stack.Pop();
-                            Stack.Push(second + top);
+                            Stack.Push(calculation(second, top));
                         }
                         break;
                     case "-":
