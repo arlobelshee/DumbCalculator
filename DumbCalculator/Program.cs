@@ -84,6 +84,11 @@ namespace DumbCalculator
                             }
                             break;
                         case "+":
+                            if (Stack.Count < 2)
+                            {
+                                Console.WriteLine("Addition requires at least 2 arguments. Push more values onto the stack.");
+                            }
+                            else
                             {
                                 var top = Stack.Pop();
                                 var second = Stack.Pop();
@@ -91,6 +96,11 @@ namespace DumbCalculator
                             }
                             break;
                         case "-":
+                            if (Stack.Count < 2)
+                            {
+                                Console.WriteLine("Subtraction requires at least 2 arguments. Push more values onto the stack.");
+                            }
+                            else
                             {
                                 var top = Stack.Pop();
                                 var second = Stack.Pop();
@@ -98,6 +108,11 @@ namespace DumbCalculator
                             }
                             break;
                         case "*":
+                            if (Stack.Count < 2)
+                            {
+                                Console.WriteLine("Multiplication requires at least 2 arguments. Push more values onto the stack.");
+                            }
+                            else
                             {
                                 var top = Stack.Pop();
                                 var second = Stack.Pop();
@@ -105,6 +120,11 @@ namespace DumbCalculator
                             }
                             break;
                         case "/":
+                            if (Stack.Count < 2)
+                            {
+                                Console.WriteLine("Division requires at least 2 arguments. Push more values onto the stack.");
+                            }
+                            else
                             {
                                 var top = Stack.Pop();
                                 var second = Stack.Pop();
