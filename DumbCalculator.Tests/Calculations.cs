@@ -59,6 +59,7 @@ namespace DumbCalculator.Tests
         }
 
         [Fact]
+        [Trait("Category", "Documents possible bug")]
         public void Exponentiate()
         {
             Program.Stack.Clear();
