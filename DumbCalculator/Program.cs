@@ -84,9 +84,7 @@ namespace DumbCalculator
                         break;
                     case "^":
                         {
-                            var top = Stack.Pop();
-                            var second = Stack.Pop();
-                            Stack.Push((decimal)Math.Pow((double)top, (double)second));
+                            PerformBinaryOperation((lhs, rhs) => (decimal)Math.Pow((double)rhs, (double)lhs));
                         }
                         break;
                     case "+":
