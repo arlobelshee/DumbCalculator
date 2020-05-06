@@ -21,7 +21,7 @@ namespace DumbCalculator
 	end formula -> stop defining a formula. Return state to what it was when defining started.
 	call [name] -> execute a formula.";
 
-        private static readonly Stack<decimal> Stack = new Stack<decimal>();
+        public static readonly Stack<decimal> Stack = new Stack<decimal>();
         private static readonly Dictionary<string, decimal> Variables = new Dictionary<string, decimal>();
         private static FormulaDefinition formulaBeingDefined = null;
         private static readonly Dictionary<string, FormulaDefinition> formulas;
@@ -34,111 +34,116 @@ namespace DumbCalculator
             {
                 Console.Write("> ");
                 var input = Console.ReadLine().Trim();
-                if (decimal.TryParse(input, out decimal number))
+                ProcessOneInput(input);
+            }
+        }
+
+        public static void ProcessOneInput(string input)
+        {
+            if (decimal.TryParse(input, out decimal number))
+            {
+                Stack.Push(number);
+            }
+            else if (input.StartsWith("def "))
+            {
+                formulaBeingDefined = new FormulaDefinition(input.Substring(4));
+            }
+            else if (input.Equals("end formula"))
+            {
+                if (null == formulaBeingDefined)
                 {
-                    Stack.Push(number);
-                }
-                else if (input.StartsWith("def "))
-                {
-                    formulaBeingDefined = new FormulaDefinition(input.Substring(4));
-                }
-                else if (input.Equals("end formula"))
-                {
-                    if (null == formulaBeingDefined)
-                    {
-                        Console.WriteLine("No formula to end! Everything is unaltered.");
-                    }
-                    else
-                    {
-                        formulaBeingDefined.AddTo(formulas);
-                        formulaBeingDefined = null;
-                    }
-                }
-                else if (input.StartsWith("="))
-                {
-                    if (Stack.Count == 0)
-                    {
-                        Console.WriteLine("Nothing to store! Variable unaltered.");
-                    }
-                    else
-                    {
-                        Variables[input.Substring(1)] = Stack.Pop();
-                    }
-                }
-                else if (input.StartsWith("$"))
-                {
-                    Stack.Push(Variables[input.Substring(1)]);
+                    Console.WriteLine("No formula to end! Everything is unaltered.");
                 }
                 else
                 {
-                    switch (input)
-                    {
-                        case "?":
-                            Console.WriteLine(HelpInfo);
-                            break;
-                        case "^":
+                    formulaBeingDefined.AddTo(formulas);
+                    formulaBeingDefined = null;
+                }
+            }
+            else if (input.StartsWith("="))
+            {
+                if (Stack.Count == 0)
+                {
+                    Console.WriteLine("Nothing to store! Variable unaltered.");
+                }
+                else
+                {
+                    Variables[input.Substring(1)] = Stack.Pop();
+                }
+            }
+            else if (input.StartsWith("$"))
+            {
+                Stack.Push(Variables[input.Substring(1)]);
+            }
+            else
+            {
+                switch (input)
+                {
+                    case "?":
+                        Console.WriteLine(HelpInfo);
+                        break;
+                    case "^":
+                        {
+                            var top = Stack.Pop();
+                            var second = Stack.Pop();
+                            Stack.Push((decimal)Math.Pow((double)top, (double)second));
+                        }
+                        break;
+                    case "+":
+                        {
+                            var top = Stack.Pop();
+                            var second = Stack.Pop();
+                            Stack.Push(second + top);
+                        }
+                        break;
+                    case "-":
+                        {
+                            var top = Stack.Pop();
+                            var second = Stack.Pop();
+                            Stack.Push(second - top);
+                        }
+                        break;
+                    case "*":
+                        {
+                            var top = Stack.Pop();
+                            var second = Stack.Pop();
+                            Stack.Push(second * top);
+                        }
+                        break;
+                    case "/":
+                        {
+                            var top = Stack.Pop();
+                            var second = Stack.Pop();
+                            Stack.Push(second / top);
+                        }
+                        break;
+                    case "dump":
+                        Console.WriteLine("Functions:");
+                        using (System.IO.Stream output = Console.OpenStandardOutput())
+                        {
+                            foreach (var formula in formulas.Values)
                             {
-                                var top = Stack.Pop();
-                                var second = Stack.Pop();
-                                Stack.Push((decimal)Math.Pow((double)top, (double)second));
+                                formula.PrintTo(output);
                             }
-                            break;
-                        case "+":
-                            {
-                                var top = Stack.Pop();
-                                var second = Stack.Pop();
-                                Stack.Push(second + top);
-                            }
-                            break;
-                        case "-":
-                            {
-                                var top = Stack.Pop();
-                                var second = Stack.Pop();
-                                Stack.Push(second - top);
-                            }
-                            break;
-                        case "*":
-                            {
-                                var top = Stack.Pop();
-                                var second = Stack.Pop();
-                                Stack.Push(second * top);
-                            }
-                            break;
-                        case "/":
-                            {
-                                var top = Stack.Pop();
-                                var second = Stack.Pop();
-                                Stack.Push(second / top);
-                            }
-                            break;
-                        case "dump":
-                            Console.WriteLine("Functions:");
-                            using (System.IO.Stream output = Console.OpenStandardOutput())
-                            {
-                                foreach (var formula in formulas.Values)
-                                {
-                                    formula.PrintTo(output);
-                                }
-                            }
-                            Console.WriteLine("Variables:");
-                            foreach (var variable in Variables)
-                            {
-                                Console.WriteLine("	{0} := {1}", variable.Key, variable.Value);
-                            }
-                            Console.WriteLine("Stack");
-                            foreach (var value in Stack)
-                            {
-                                Console.WriteLine("	{0}", value);
-                            }
-                            break;
-                        case "q":
-                            Console.WriteLine("Quitting now.");
-                            Console.ReadLine();
-                            return;
-                        default:
-                            Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
-                            break;
-                    }
+                        }
+                        Console.WriteLine("Variables:");
+                        foreach (var variable in Variables)
+                        {
+                            Console.WriteLine("	{0} := {1}", variable.Key, variable.Value);
+                        }
+                        Console.WriteLine("Stack");
+                        foreach (var value in Stack)
+                        {
+                            Console.WriteLine("	{0}", value);
+                        }
+                        break;
+                    case "q":
+                        Console.WriteLine("Quitting now.");
+                        Console.ReadLine();
+                        return;
+                    default:
+                        Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
+                        break;
                 }
             }
         }
