@@ -5,13 +5,26 @@ namespace DumbCalculator.Tests
 {
 	public class Calculations
 	{
+        private const decimal lhs = 1.2M;
+        private const decimal rhs = 2.5M;
+
         [Fact]
         public void TakeInNumbers()
         {
             Program.Stack.Clear();
             Program.ProcessOneInput("-33.6");
             Program.ProcessOneInput("2.5");
-            Program.Stack.Should().BeEquivalentTo(-33.6d, 2.5d);
+            Program.Stack.Should().BeEquivalentTo(-33.6M, 2.5M);
+        }
+
+        [Fact]
+        public void Add()
+        {
+            Program.Stack.Clear();
+            Program.ProcessOneInput(lhs.ToString());
+            Program.ProcessOneInput(rhs.ToString());
+            Program.ProcessOneInput("+");
+            Program.Stack.Should().BeEquivalentTo(lhs + rhs);
         }
 	}
 }
