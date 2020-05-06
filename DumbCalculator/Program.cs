@@ -78,37 +78,42 @@ namespace DumbCalculator
                             break;
                         case "^":
                             {
+                                Func<decimal, decimal, decimal> computation = (x, y) => (decimal)Math.Pow((double)x, (double)y);
                                 var top = Stack.Pop();
                                 var second = Stack.Pop();
-                                Stack.Push((decimal)Math.Pow((double)top, (double)second));
+                                Stack.Push(computation(top, second));
                             }
                             break;
                         case "+":
                             {
+                                Func<decimal, decimal, decimal> computation = (x, y) => x + y;
                                 var top = Stack.Pop();
                                 var second = Stack.Pop();
-                                Stack.Push(second + top);
+                                Stack.Push(computation(second, top));
                             }
                             break;
                         case "-":
                             {
+                                Func<decimal, decimal, decimal> computation = (x, y) => x - y;
                                 var top = Stack.Pop();
                                 var second = Stack.Pop();
-                                Stack.Push(second - top);
+                                Stack.Push(computation(second, top));
                             }
                             break;
                         case "*":
                             {
+                                Func<decimal, decimal, decimal> computation = (x, y) => x * y;
                                 var top = Stack.Pop();
                                 var second = Stack.Pop();
-                                Stack.Push(second * top);
+                                Stack.Push(computation(second, top));
                             }
                             break;
                         case "/":
                             {
+                                Func<decimal, decimal, decimal> computation = (x, y) => x / y;
                                 var top = Stack.Pop();
                                 var second = Stack.Pop();
-                                Stack.Push(second / top);
+                                Stack.Push(computation(second, top));
                             }
                             break;
                         case "dump":
