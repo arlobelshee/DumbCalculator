@@ -91,8 +91,7 @@ namespace DumbCalculator
                         break;
                     case "+":
                         {
-                            Func<decimal, decimal, decimal> calculation = (lhs, rhs) => lhs + rhs;
-                            PerformBinaryOperation(calculation);
+                            PerformBinaryOperation((lhs, rhs) => lhs + rhs);
                         }
                         break;
                     case "-":
