@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using System;
 using Xunit;
 
 namespace DumbCalculator.Tests
@@ -55,6 +56,16 @@ namespace DumbCalculator.Tests
             Program.ProcessOneInput(rhs.ToString());
             Program.ProcessOneInput("/");
             Program.Stack.Should().BeEquivalentTo(lhs / rhs);
+        }
+
+        [Fact]
+        public void Exponentiate()
+        {
+            Program.Stack.Clear();
+            Program.ProcessOneInput(rhs.ToString());
+            Program.ProcessOneInput(lhs.ToString());
+            Program.ProcessOneInput("^");
+            Program.Stack.Should().BeEquivalentTo((decimal) Math.Pow((double) lhs, (double) rhs));
         }
 	}
 }
