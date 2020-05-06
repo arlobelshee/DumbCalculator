@@ -20,8 +20,10 @@ namespace DumbCalculator
 	end formula -> stop defining a formula. Return state to what it was when defining started.
 	call [name] -> execute a formula.";
 
-		private static readonly Stack<decimal> Stack = new Stack<decimal>();
-		private static readonly Dictionary<string, decimal> Variables = new Dictionary<string, decimal>();
+		private static Stack<decimal> Stack = new Stack<decimal>();
+		private static Dictionary<string, decimal> Variables = new Dictionary<string, decimal>();
+		private static FormulaDefinition formulaBeingDefined = null;
+		private static Dictionary<string, FormulaDefinition> formulas = new Dictionary<string, FormulaDefinition>();
 
 		private static void Main(string[] args)
 		{
@@ -46,6 +48,12 @@ namespace DumbCalculator
 						Variables[input.Substring(1)] = Stack.Pop();
 					}
 				}
+				else if (input.StartsWith("def "))
+				{
+					formulaBeingDefined = new FormulaDefinition(input.Substring(4), Stack, Variables);
+					Stack = new Stack<decimal>(Stack);
+					Variables = new Dictionary<string, decimal>(Variables);
+				}
 				else if (input.StartsWith("$"))
 				{
 					Stack.Push(Variables[input.Substring(1)]);
@@ -56,6 +64,12 @@ namespace DumbCalculator
 					{
 						case "?":
 							Console.WriteLine(HelpInfo);
+							break;
+						case "end formula":
+							formulas[formulaBeingDefined.Name] = formulaBeingDefined;
+							Stack = formulaBeingDefined.InitialStack;
+							Variables = formulaBeingDefined.InitialVariables;
+							formulaBeingDefined = null;
 							break;
 						case "+":
 							if (Stack.Count < 2)
