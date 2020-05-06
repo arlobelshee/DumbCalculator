@@ -79,41 +79,31 @@ namespace DumbCalculator
                         case "^":
                             {
                                 Func<decimal, decimal, decimal> computation = (x, y) => (decimal)Math.Pow((double)x, (double)y);
-                                var top = Stack.Pop();
-                                var second = Stack.Pop();
-                                Stack.Push(computation(top, second));
+                                DoBinaryOperation(computation);
                             }
                             break;
                         case "+":
                             {
                                 Func<decimal, decimal, decimal> computation = (x, y) => x + y;
-                                var top = Stack.Pop();
-                                var second = Stack.Pop();
-                                Stack.Push(computation(second, top));
+                                DoBinaryOperation(computation);
                             }
                             break;
                         case "-":
                             {
                                 Func<decimal, decimal, decimal> computation = (x, y) => x - y;
-                                var top = Stack.Pop();
-                                var second = Stack.Pop();
-                                Stack.Push(computation(second, top));
+                                DoBinaryOperation(computation);
                             }
                             break;
                         case "*":
                             {
                                 Func<decimal, decimal, decimal> computation = (x, y) => x * y;
-                                var top = Stack.Pop();
-                                var second = Stack.Pop();
-                                Stack.Push(computation(second, top));
+                                DoBinaryOperation(computation);
                             }
                             break;
                         case "/":
                             {
                                 Func<decimal, decimal, decimal> computation = (x, y) => x / y;
-                                var top = Stack.Pop();
-                                var second = Stack.Pop();
-                                Stack.Push(computation(second, top));
+                                DoBinaryOperation(computation);
                             }
                             break;
                         case "dump":
@@ -146,6 +136,13 @@ namespace DumbCalculator
                     }
                 }
             }
+        }
+
+        private static void DoBinaryOperation(Func<decimal, decimal, decimal> computation)
+        {
+            var top = Stack.Pop();
+            var second = Stack.Pop();
+            Stack.Push(computation(top, second));
         }
     }
 }
