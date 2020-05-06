@@ -96,23 +96,17 @@ namespace DumbCalculator
                         break;
                     case "-":
                         {
-                            var top = Stack.Pop();
-                            var second = Stack.Pop();
-                            Stack.Push(second - top);
+                            PerformBinaryOperation((lhs, rhs) => lhs - rhs);
                         }
                         break;
                     case "*":
                         {
-                            var top = Stack.Pop();
-                            var second = Stack.Pop();
-                            Stack.Push(second * top);
+                            PerformBinaryOperation((lhs, rhs) => lhs * rhs);
                         }
                         break;
                     case "/":
                         {
-                            var top = Stack.Pop();
-                            var second = Stack.Pop();
-                            Stack.Push(second / top);
+                            PerformBinaryOperation((lhs, rhs) => lhs / rhs);
                         }
                         break;
                     case "dump":
