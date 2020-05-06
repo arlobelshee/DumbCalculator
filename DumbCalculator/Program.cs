@@ -22,6 +22,8 @@ namespace DumbCalculator
 
 		private static readonly Stack<decimal> Stack = new Stack<decimal>();
 		private static readonly Dictionary<string, decimal> Variables = new Dictionary<string, decimal>();
+		private static FormulaDefinition formulaBeingDefined = null;
+		private static Dictionary<string, FormulaDefinition> formulas = new Dictionary<string, FormulaDefinition>();
 
 		private static void Main(string[] args)
 		{
@@ -46,6 +48,10 @@ namespace DumbCalculator
 						Variables[input.Substring(1)] = Stack.Pop();
 					}
 				}
+				else if (input.StartsWith("def "))
+				{
+					formulaBeingDefined = new FormulaDefinition(input.Substring(4));
+				}
 				else if (input.StartsWith("$"))
 				{
 					Stack.Push(Variables[input.Substring(1)]);
@@ -56,6 +62,10 @@ namespace DumbCalculator
 					{
 						case "?":
 							Console.WriteLine(HelpInfo);
+							break;
+						case "end formula":
+							formulas[formulaBeingDefined.Name] = formulaBeingDefined;
+							formulaBeingDefined = null;
 							break;
 						case "+":
 							if (Stack.Count < 2)
