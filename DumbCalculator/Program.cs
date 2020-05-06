@@ -135,6 +135,11 @@ namespace DumbCalculator
 
         private static void DoBinaryOperation(Func<decimal, decimal, decimal> computation)
         {
+            if (Stack.Count < 2)
+            {
+                Console.WriteLine("This operation requires two arguments on the stack. Please push more values and try again.");
+                return;
+            }
             var top = Stack.Pop();
             var second = Stack.Pop();
             Stack.Push(computation(top, second));
