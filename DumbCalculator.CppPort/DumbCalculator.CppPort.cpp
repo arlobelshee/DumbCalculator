@@ -38,6 +38,118 @@ bool TryParseDouble(std::string input, double& result) {
 	}
 }
 
+namespace {
+auto Applesauce (std::string& input) -> int {
+	double number;
+	if (TryParseDouble(input, number))
+	{
+		Stack.push_back(number);
+	}
+	else if (std::string::npos != input.rfind('=', 0))
+	{
+		if (Stack.empty())
+		{
+			WriteLine("Nothing to store! Variable unaltered.");
+		}
+		else
+		{
+			Variables[input.substr(1)] = Stack.back();
+			Stack.pop_back();
+		}
+	}
+	else if (std::string::npos != input.rfind('$', 0))
+	{
+		Stack.push_back(Variables[input.substr(1)]);
+	}
+	else if (input.compare("?") == 0)
+	{
+		WriteLine(HelpInfo);
+	}
+	else if (input.compare("+") == 0)
+	{
+		if (Stack.size() < 2)
+		{
+			WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+		}
+		else
+		{
+			double top = Stack.back();
+			Stack.pop_back();
+			double second = Stack.back();
+			Stack.pop_back();
+			Stack.push_back(second + top);
+		}
+	}
+	else if (input.compare("-") == 0)
+	{
+		if (Stack.size() < 2)
+		{
+			WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+		}
+		else
+		{
+			double top = Stack.back();
+			Stack.pop_back();
+			double second = Stack.back();
+			Stack.pop_back();
+			Stack.push_back(second - top);
+		}
+	}
+	else if (input.compare("*") == 0)
+	{
+		if (Stack.size() < 2)
+		{
+			WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+		}
+		else
+		{
+			double top = Stack.back();
+			Stack.pop_back();
+			double second = Stack.back();
+			Stack.pop_back();
+			Stack.push_back(second * top);
+		}
+	}
+	else if (input.compare("/") == 0)
+	{
+		if (Stack.size() < 2)
+		{
+			WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+		}
+		else
+		{
+			double top = Stack.back();
+			Stack.pop_back();
+			double second = Stack.back();
+			Stack.pop_back();
+			Stack.push_back(second / top);
+		}
+	}
+	else if (input.compare("dump") == 0)
+	{
+		WriteLine("Variables:");
+		for (auto& variable : Variables)
+		{
+			std::cout << " " << variable.first << " := " << variable.second << std::endl;
+		}
+		WriteLine("Stack");
+		for (auto& value : Stack)
+		{
+			std::cout << " " << value << std::endl;
+		}
+	}
+	else if (input.compare("q") == 0)
+	{
+		WriteLine("Quitting now.");
+		std::getline(std::cin, input);
+		return 0;
+	}
+	else
+	{
+		WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
+	}
+};
+}
 int main()
 {
 	std::cout << "Hello World!\n";
@@ -49,116 +161,6 @@ int main()
 		std::string input;
 		std::getline(std::cin, input);
 
-		auto Applesauce = [](std::string &input) -> int {
-			double number;
-			if (TryParseDouble(input, number))
-			{
-				Stack.push_back(number);
-			}
-			else if (std::string::npos != input.rfind('=', 0))
-			{
-				if (Stack.empty())
-				{
-					WriteLine("Nothing to store! Variable unaltered.");
-				}
-				else
-				{
-					Variables[input.substr(1)] = Stack.back();
-					Stack.pop_back();
-				}
-			}
-			else if (std::string::npos != input.rfind('$', 0))
-			{
-				Stack.push_back(Variables[input.substr(1)]);
-			}
-			else if (input.compare("?") == 0)
-			{
-				WriteLine(HelpInfo);
-			}
-			else if (input.compare("+") == 0)
-			{
-				if (Stack.size() < 2)
-				{
-					WriteLine("Not enough values to add! Please push more onto the stack and try again.");
-				}
-				else
-				{
-					double top = Stack.back();
-					Stack.pop_back();
-					double second = Stack.back();
-					Stack.pop_back();
-					Stack.push_back(second + top);
-				}
-			}
-			else if (input.compare("-") == 0)
-			{
-				if (Stack.size() < 2)
-				{
-					WriteLine("Not enough values to add! Please push more onto the stack and try again.");
-				}
-				else
-				{
-					double top = Stack.back();
-					Stack.pop_back();
-					double second = Stack.back();
-					Stack.pop_back();
-					Stack.push_back(second - top);
-				}
-			}
-			else if (input.compare("*") == 0)
-			{
-				if (Stack.size() < 2)
-				{
-					WriteLine("Not enough values to add! Please push more onto the stack and try again.");
-				}
-				else
-				{
-					double top = Stack.back();
-					Stack.pop_back();
-					double second = Stack.back();
-					Stack.pop_back();
-					Stack.push_back(second * top);
-				}
-			}
-			else if (input.compare("/") == 0)
-			{
-				if (Stack.size() < 2)
-				{
-					WriteLine("Not enough values to add! Please push more onto the stack and try again.");
-				}
-				else
-				{
-					double top = Stack.back();
-					Stack.pop_back();
-					double second = Stack.back();
-					Stack.pop_back();
-					Stack.push_back(second / top);
-				}
-			}
-			else if (input.compare("dump") == 0)
-			{
-				WriteLine("Variables:");
-				for (auto& variable : Variables)
-				{
-					std::cout << " " << variable.first << " := " << variable.second << std::endl;
-				}
-				WriteLine("Stack");
-				for (auto& value : Stack)
-				{
-					std::cout << " " << value << std::endl;
-				}
-			}
-			else if (input.compare("q") == 0)
-			{
-				WriteLine("Quitting now.");
-				std::getline(std::cin, input);
-				return 0;
-			}
-			else
-			{
-				WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
-			}
-		};
 		Applesauce(input);
 	}
 }
