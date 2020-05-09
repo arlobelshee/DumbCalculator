@@ -2,19 +2,166 @@
 //
 
 #include <iostream>
+#include <string>
+#include <string_view>
+#include <vector>
+#include <map>
+
+const std::string HelpInfo = R"(Supported commands:
+? ->print this help.
+q->quit.
+dump->dump the contents of the stack and all variables.
+[any decimal number]->push that number onto the stack.
++ ->Pop the top 2 items on the stack, add them, push result onto the stack.
+- ->Pop the top 2 items on the stack, subtract the top from the one under it, push result onto the stack.
+* ->Pop the top 2 items on the stack, multiply them, push result onto the stack.
+/ ->Pop the top 2 items on the stack, divide the top into the one under it, push result onto the stack.
+= [name]->pop the top of the stack and store it into a variable named `name`.
+$[name]->retrieve the value of the variable named `name` and push it onto the stack.)";
+
+static std::vector<double> Stack;
+static std::map<std::string, double> Variables;
+
+void WriteLine(std::string message)
+{
+	std::cout << message << std::endl;
+}
+
+bool TryParseDouble(std::string input, double& result) {
+	try
+	{
+		result = std::stod(input);
+		return true;
+	}
+	catch (...) {
+		return false;
+	}
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	std::cout << "Hello World!\n";
+	WriteLine(
+		"I wish to do your bidding! I'm an RPN interpreter! I also support variables. Use the special command ? to get help.");
+	while (true)
+	{
+		std::cout << "> ";
+		std::string input;
+		std::getline(std::cin, input);
+
+		double number;
+		if (TryParseDouble(input, number))
+		{
+			Stack.push_back(number);
+			continue;
+		}
+		if (std::string::npos != input.rfind('=', 0))
+		{
+			if (Stack.empty())
+			{
+				WriteLine("Nothing to store! Variable unaltered.");
+			}
+			else
+			{
+				Variables[input.substr(1)] = Stack.back();
+				Stack.pop_back();
+			}
+			continue;
+		}
+		if (std::string::npos != input.rfind('$', 0))
+		{
+			Stack.push_back(Variables[input.substr(1)]);
+			continue;
+		}
+		if (input.compare("?") == 0)
+		{
+			WriteLine(HelpInfo);
+			continue;
+		}
+		if (input.compare("+") == 0)
+		{
+			if (Stack.size() < 2)
+			{
+				WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+			}
+			else
+			{
+				double top = Stack.back();
+				Stack.pop_back();
+				double second = Stack.back();
+				Stack.pop_back();
+				Stack.push_back(second + top);
+			}
+			continue;
+		}
+		if (input.compare("-") == 0)
+		{
+			if (Stack.size() < 2)
+			{
+				WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+			}
+			else
+			{
+				double top = Stack.back();
+				Stack.pop_back();
+				double second = Stack.back();
+				Stack.pop_back();
+				Stack.push_back(second - top);
+			}
+			continue;
+		}
+		if (input.compare("*") == 0)
+		{
+			if (Stack.size() < 2)
+			{
+				WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+			}
+			else
+			{
+				double top = Stack.back();
+				Stack.pop_back();
+				double second = Stack.back();
+				Stack.pop_back();
+				Stack.push_back(second * top);
+			}
+			continue;
+		}
+		if (input.compare("/") == 0)
+		{
+			if (Stack.size() < 2)
+			{
+				WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+			}
+			else
+			{
+				double top = Stack.back();
+				Stack.pop_back();
+				double second = Stack.back();
+				Stack.pop_back();
+				Stack.push_back(second / top);
+			}
+			continue;
+		}
+		if (input.compare("dump") == 0)
+		{
+			WriteLine("Variables:");
+			for(auto& variable : Variables)
+			{
+				std::cout << " " << variable.first << " := " << variable.second << std::endl;
+			}
+			WriteLine("Stack");
+			for (auto& value : Stack)
+			{
+				std::cout << " " << value << std::endl;
+			}
+			continue;
+		}
+		if (input.compare("q") == 0)
+		{
+			WriteLine("Quitting now.");
+			std::getline(std::cin, input);
+			return 0;
+		}
+		WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
+	}
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
