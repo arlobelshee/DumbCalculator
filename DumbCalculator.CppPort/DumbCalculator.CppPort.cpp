@@ -49,119 +49,121 @@ int main()
 		std::string input;
 		std::getline(std::cin, input);
 
-		double number;
-		if (TryParseDouble(input, number))
 		{
-			Stack.push_back(number);
-			continue;
+			double number;
+			if (TryParseDouble(input, number))
+			{
+				Stack.push_back(number);
+				continue;
+			}
+			if (std::string::npos != input.rfind('=', 0))
+			{
+				if (Stack.empty())
+				{
+					WriteLine("Nothing to store! Variable unaltered.");
+				}
+				else
+				{
+					Variables[input.substr(1)] = Stack.back();
+					Stack.pop_back();
+				}
+				continue;
+			}
+			if (std::string::npos != input.rfind('$', 0))
+			{
+				Stack.push_back(Variables[input.substr(1)]);
+				continue;
+			}
+			if (input.compare("?") == 0)
+			{
+				WriteLine(HelpInfo);
+				continue;
+			}
+			if (input.compare("+") == 0)
+			{
+				if (Stack.size() < 2)
+				{
+					WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+				}
+				else
+				{
+					double top = Stack.back();
+					Stack.pop_back();
+					double second = Stack.back();
+					Stack.pop_back();
+					Stack.push_back(second + top);
+				}
+				continue;
+			}
+			if (input.compare("-") == 0)
+			{
+				if (Stack.size() < 2)
+				{
+					WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+				}
+				else
+				{
+					double top = Stack.back();
+					Stack.pop_back();
+					double second = Stack.back();
+					Stack.pop_back();
+					Stack.push_back(second - top);
+				}
+				continue;
+			}
+			if (input.compare("*") == 0)
+			{
+				if (Stack.size() < 2)
+				{
+					WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+				}
+				else
+				{
+					double top = Stack.back();
+					Stack.pop_back();
+					double second = Stack.back();
+					Stack.pop_back();
+					Stack.push_back(second * top);
+				}
+				continue;
+			}
+			if (input.compare("/") == 0)
+			{
+				if (Stack.size() < 2)
+				{
+					WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+				}
+				else
+				{
+					double top = Stack.back();
+					Stack.pop_back();
+					double second = Stack.back();
+					Stack.pop_back();
+					Stack.push_back(second / top);
+				}
+				continue;
+			}
+			if (input.compare("dump") == 0)
+			{
+				WriteLine("Variables:");
+				for (auto& variable : Variables)
+				{
+					std::cout << " " << variable.first << " := " << variable.second << std::endl;
+				}
+				WriteLine("Stack");
+				for (auto& value : Stack)
+				{
+					std::cout << " " << value << std::endl;
+				}
+				continue;
+			}
+			if (input.compare("q") == 0)
+			{
+				WriteLine("Quitting now.");
+				std::getline(std::cin, input);
+				return 0;
+			}
+			WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
 		}
-		if (std::string::npos != input.rfind('=', 0))
-		{
-			if (Stack.empty())
-			{
-				WriteLine("Nothing to store! Variable unaltered.");
-			}
-			else
-			{
-				Variables[input.substr(1)] = Stack.back();
-				Stack.pop_back();
-			}
-			continue;
-		}
-		if (std::string::npos != input.rfind('$', 0))
-		{
-			Stack.push_back(Variables[input.substr(1)]);
-			continue;
-		}
-		if (input.compare("?") == 0)
-		{
-			WriteLine(HelpInfo);
-			continue;
-		}
-		if (input.compare("+") == 0)
-		{
-			if (Stack.size() < 2)
-			{
-				WriteLine("Not enough values to add! Please push more onto the stack and try again.");
-			}
-			else
-			{
-				double top = Stack.back();
-				Stack.pop_back();
-				double second = Stack.back();
-				Stack.pop_back();
-				Stack.push_back(second + top);
-			}
-			continue;
-		}
-		if (input.compare("-") == 0)
-		{
-			if (Stack.size() < 2)
-			{
-				WriteLine("Not enough values to add! Please push more onto the stack and try again.");
-			}
-			else
-			{
-				double top = Stack.back();
-				Stack.pop_back();
-				double second = Stack.back();
-				Stack.pop_back();
-				Stack.push_back(second - top);
-			}
-			continue;
-		}
-		if (input.compare("*") == 0)
-		{
-			if (Stack.size() < 2)
-			{
-				WriteLine("Not enough values to add! Please push more onto the stack and try again.");
-			}
-			else
-			{
-				double top = Stack.back();
-				Stack.pop_back();
-				double second = Stack.back();
-				Stack.pop_back();
-				Stack.push_back(second * top);
-			}
-			continue;
-		}
-		if (input.compare("/") == 0)
-		{
-			if (Stack.size() < 2)
-			{
-				WriteLine("Not enough values to add! Please push more onto the stack and try again.");
-			}
-			else
-			{
-				double top = Stack.back();
-				Stack.pop_back();
-				double second = Stack.back();
-				Stack.pop_back();
-				Stack.push_back(second / top);
-			}
-			continue;
-		}
-		if (input.compare("dump") == 0)
-		{
-			WriteLine("Variables:");
-			for(auto& variable : Variables)
-			{
-				std::cout << " " << variable.first << " := " << variable.second << std::endl;
-			}
-			WriteLine("Stack");
-			for (auto& value : Stack)
-			{
-				std::cout << " " << value << std::endl;
-			}
-			continue;
-		}
-		if (input.compare("q") == 0)
-		{
-			WriteLine("Quitting now.");
-			std::getline(std::cin, input);
-			return 0;
-		}
-		WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
 	}
 }
