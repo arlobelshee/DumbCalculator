@@ -39,7 +39,7 @@ bool TryParseDouble(std::string input, double& result) {
 }
 
 namespace {
-auto Applesauce (std::string& input) -> int {
+	int Applesauce (std::string& input) {
 	double number;
 	if (TryParseDouble(input, number))
 	{
