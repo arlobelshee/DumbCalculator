@@ -54,9 +54,8 @@ int main()
 			if (TryParseDouble(input, number))
 			{
 				Stack.push_back(number);
-				continue;
 			}
-			if (std::string::npos != input.rfind('=', 0))
+			else if (std::string::npos != input.rfind('=', 0))
 			{
 				if (Stack.empty())
 				{
@@ -67,19 +66,16 @@ int main()
 					Variables[input.substr(1)] = Stack.back();
 					Stack.pop_back();
 				}
-				continue;
 			}
-			if (std::string::npos != input.rfind('$', 0))
+			else if (std::string::npos != input.rfind('$', 0))
 			{
 				Stack.push_back(Variables[input.substr(1)]);
-				continue;
 			}
-			if (input.compare("?") == 0)
+			else if (input.compare("?") == 0)
 			{
 				WriteLine(HelpInfo);
-				continue;
 			}
-			if (input.compare("+") == 0)
+			else if (input.compare("+") == 0)
 			{
 				if (Stack.size() < 2)
 				{
@@ -93,9 +89,8 @@ int main()
 					Stack.pop_back();
 					Stack.push_back(second + top);
 				}
-				continue;
 			}
-			if (input.compare("-") == 0)
+			else if (input.compare("-") == 0)
 			{
 				if (Stack.size() < 2)
 				{
@@ -109,9 +104,8 @@ int main()
 					Stack.pop_back();
 					Stack.push_back(second - top);
 				}
-				continue;
 			}
-			if (input.compare("*") == 0)
+			else if (input.compare("*") == 0)
 			{
 				if (Stack.size() < 2)
 				{
@@ -125,9 +119,8 @@ int main()
 					Stack.pop_back();
 					Stack.push_back(second * top);
 				}
-				continue;
 			}
-			if (input.compare("/") == 0)
+			else if (input.compare("/") == 0)
 			{
 				if (Stack.size() < 2)
 				{
@@ -141,9 +134,8 @@ int main()
 					Stack.pop_back();
 					Stack.push_back(second / top);
 				}
-				continue;
 			}
-			if (input.compare("dump") == 0)
+			else if (input.compare("dump") == 0)
 			{
 				WriteLine("Variables:");
 				for (auto& variable : Variables)
@@ -155,15 +147,17 @@ int main()
 				{
 					std::cout << " " << value << std::endl;
 				}
-				continue;
 			}
-			if (input.compare("q") == 0)
+			else if (input.compare("q") == 0)
 			{
 				WriteLine("Quitting now.");
 				std::getline(std::cin, input);
 				return 0;
 			}
-			WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
+			else
+			{
+				WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
+			}
 		}
 	}
 }
