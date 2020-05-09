@@ -49,7 +49,7 @@ int main()
 		std::string input;
 		std::getline(std::cin, input);
 
-		auto Applesauce = [&input]() -> int {
+		auto Applesauce = [](auto &input) -> int {
 			double number;
 			if (TryParseDouble(input, number))
 			{
@@ -159,6 +159,6 @@ int main()
 				WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
 			}
 		};
-		Applesauce();
+		Applesauce(input);
 	}
 }
