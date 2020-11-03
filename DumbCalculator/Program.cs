@@ -122,7 +122,7 @@ namespace DumbCalculator
                             break;
                         case "q":
                             userInteraction.WriteLine("Quitting now.");
-                            Console.ReadLine();
+                            userInteraction.ReadLine();
                             return;
                         default:
                             userInteraction.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
