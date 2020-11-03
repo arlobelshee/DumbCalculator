@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DumbCalculator
 {
     internal class ReadWriteToConsole
     {
+        public static void Write(string value)
+        {
+            Console.Write(value);
+        }
     }
 }
