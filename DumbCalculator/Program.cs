@@ -28,7 +28,8 @@ namespace DumbCalculator
 
         private static void CalculateForUserUntilDone(ReadWriteToConsole userInteraction)
         {
-            WriteLine();
+            WriteLine(
+                "I wish to do your bidding! I'm an RPN interpreter! I also support variables. Use the special command ? to get help.");
             while (true)
             {
                 userInteraction.Write("> ");
@@ -131,10 +132,9 @@ namespace DumbCalculator
             }
         }
 
-        private static void WriteLine()
+        private static void WriteLine(string value)
         {
-            Console.WriteLine(
-                "I wish to do your bidding! I'm an RPN interpreter! I also support variables. Use the special command ? to get help.");
+            Console.WriteLine(value);
         }
     }
 }
