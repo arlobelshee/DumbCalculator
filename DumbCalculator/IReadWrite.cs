@@ -1,6 +1,6 @@
 ﻿namespace DumbCalculator
 {
-    internal interface IReadWrite
+    public interface IReadWrite
     {
         string ReadLine();
         void Write(string value);
