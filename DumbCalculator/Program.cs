@@ -33,6 +33,7 @@ namespace DumbCalculator
                 var input = Console.ReadLine().Trim();
                 keepGoing = HandleOneUserInput(input);
             }
+            Console.ReadLine();
         }
 
         public static bool HandleOneUserInput(string input)
@@ -125,7 +126,6 @@ namespace DumbCalculator
                         break;
                     case "q":
                         Console.WriteLine("Quitting now.");
-                        Console.ReadLine();
                         return false;
                     default:
                         Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
