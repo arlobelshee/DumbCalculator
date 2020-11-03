@@ -9,9 +9,9 @@ namespace DumbCalculator
             Console.Write(value);
         }
 
-        public void WriteLine(string value)
+        public void WriteLine(string formatOrValue, params object[] values)
         {
-            Console.WriteLine(value);
+            Console.WriteLine(formatOrValue, values);
         }
     }
 }

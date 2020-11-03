@@ -117,7 +117,7 @@ namespace DumbCalculator
                             userInteraction.WriteLine("Stack");
                             foreach (var value in Stack)
                             {
-                                Console.WriteLine("	{0}", value);
+                                userInteraction.WriteLine("	{0}", value);
                             }
                             break;
                         case "q":
