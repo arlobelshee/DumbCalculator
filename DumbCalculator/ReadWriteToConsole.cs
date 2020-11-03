@@ -13,5 +13,10 @@ namespace DumbCalculator
         {
             Console.WriteLine(formatOrValue, values);
         }
+
+        public static string ReadLine()
+        {
+            return Console.ReadLine();
+        }
     }
 }
