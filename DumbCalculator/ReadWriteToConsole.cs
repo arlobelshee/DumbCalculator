@@ -2,7 +2,7 @@
 
 namespace DumbCalculator
 {
-    internal class ReadWriteToConsole
+    internal class ReadWriteToConsole : IReadWrite
     {
         public void Write(string value)
         {
