@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
+﻿using Xunit;
 
 namespace DumbCalculator.Test
 {
@@ -11,8 +8,11 @@ namespace DumbCalculator.Test
         public void VerifyAddition()
         {
             // Push 2
+            Program.HandleOneUserInput("2");
             // Push 4
+            Program.HandleOneUserInput("4");
             // Push + operation
+            Program.HandleOneUserInput("+");
             // Verify stack contains 6
         }
     }
