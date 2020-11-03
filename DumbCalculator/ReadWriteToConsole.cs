@@ -4,7 +4,7 @@ namespace DumbCalculator
 {
     internal class ReadWriteToConsole
     {
-        public static void Write(string value)
+        public void Write(string value)
         {
             Console.Write(value);
         }
