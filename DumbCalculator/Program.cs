@@ -22,11 +22,12 @@ namespace DumbCalculator
 
 		private static void Main(string[] args)
 		{
-			Console.WriteLine(
+            var userInteraction = new ReadWriteToConsole();
+            Console.WriteLine(
 				"I wish to do your bidding! I'm an RPN interpreter! I also support variables. Use the special command ? to get help.");
 			while (true)
             {
-                new ReadWriteToConsole().Write("> ");
+                userInteraction.Write("> ");
                 var input = Console.ReadLine().Trim();
                 if (decimal.TryParse(input, out decimal number))
                 {
