@@ -33,7 +33,7 @@ namespace DumbCalculator
             }
         }
 
-        private static bool HandleOneUserInput(bool keepGoing, string input)
+        public static bool HandleOneUserInput(bool keepGoing, string input)
         {
             if (decimal.TryParse(input, out decimal number))
             {
