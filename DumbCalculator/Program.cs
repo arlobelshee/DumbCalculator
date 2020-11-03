@@ -131,7 +131,7 @@ namespace DumbCalculator
                 }
             }
 
-            return keepGoing;
+            return true;
         }
     }
 }
