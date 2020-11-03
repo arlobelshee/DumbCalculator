@@ -19,7 +19,9 @@ namespace DumbCalculator
 		private static readonly Stack<decimal> Stack = new Stack<decimal>();
 		private static readonly Dictionary<string, decimal> Variables = new Dictionary<string, decimal>();
 
-		private static void Main(string[] args)
+        public static IEnumerable<decimal> StackContents { get { return Stack; } }
+
+        private static void Main(string[] args)
         {
             var userInteraction = new ReadWriteToConsole();
             CalculateForUserUntilDone(userInteraction);
