@@ -17,7 +17,9 @@ namespace DumbCalculator
 	=[name] -> pop the top of the stack and store it into a variable named `name`.
 	$[name] -> retrieve the value of the variable named `name` and push it onto the stack.";
 
-		private static readonly Stack<decimal> Stack = new Stack<decimal>();
+        public static IEnumerable<decimal> StackContents { get { return Stack; } }
+
+        private static readonly Stack<decimal> Stack = new Stack<decimal>();
 		private static readonly Dictionary<string, decimal> Variables = new Dictionary<string, decimal>();
 
 		private static void Main(string[] args)

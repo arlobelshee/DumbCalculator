@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using ApprovalTests;
+using Xunit;
 
 namespace DumbCalculator.Test
 {
@@ -14,6 +15,7 @@ namespace DumbCalculator.Test
             // Push + operation
             Program.HandleOneUserInput("+");
             // Verify stack contains 6
+            Approvals.VerifyAll("Stack", Program.StackContents, value => value.ToString());
         }
     }
 }
