@@ -26,7 +26,7 @@ namespace DumbCalculator
 				"I wish to do your bidding! I'm an RPN interpreter! I also support variables. Use the special command ? to get help.");
 			while (true)
             {
-                Write();
+                Write("> ");
                 var input = Console.ReadLine().Trim();
                 if (decimal.TryParse(input, out decimal number))
                 {
@@ -126,9 +126,9 @@ namespace DumbCalculator
             }
         }
 
-        private static void Write()
+        private static void Write(string value)
         {
-            Console.Write("> ");
+            Console.Write(value);
         }
     }
 }
