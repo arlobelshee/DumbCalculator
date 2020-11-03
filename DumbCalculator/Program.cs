@@ -23,10 +23,10 @@ namespace DumbCalculator
 		private static void Main(string[] args)
         {
             var userInteraction = new ReadWriteToConsole();
-            Applesauce(userInteraction);
+            CalculateForUserUntilDone(userInteraction);
         }
 
-        private static void Applesauce(ReadWriteToConsole userInteraction)
+        private static void CalculateForUserUntilDone(ReadWriteToConsole userInteraction)
         {
             Console.WriteLine(
                 "I wish to do your bidding! I'm an RPN interpreter! I also support variables. Use the special command ? to get help.");
