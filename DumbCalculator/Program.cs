@@ -29,11 +29,11 @@ namespace DumbCalculator
             {
                 Console.Write("> ");
                 var input = Console.ReadLine().Trim();
-                keepGoing = HandleOneUserInput(keepGoing, input);
+                keepGoing = HandleOneUserInput(input);
             }
         }
 
-        public static bool HandleOneUserInput(bool keepGoing, string input)
+        public static bool HandleOneUserInput(string input)
         {
             if (decimal.TryParse(input, out decimal number))
             {
