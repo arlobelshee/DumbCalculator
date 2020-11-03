@@ -112,7 +112,7 @@ namespace DumbCalculator
                             userInteraction.WriteLine("Variables:");
                             foreach (var variable in Variables)
                             {
-                                Console.WriteLine("	{0} := {1}", variable.Key, variable.Value);
+                                userInteraction.WriteLine("	{0} := {1}", variable.Key, variable.Value);
                             }
                             userInteraction.WriteLine("Stack");
                             foreach (var value in Stack)
