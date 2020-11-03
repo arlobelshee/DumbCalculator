@@ -118,7 +118,8 @@ namespace DumbCalculator
 						case "q":
 							Console.WriteLine("Quitting now.");
 							Console.ReadLine();
-							return;
+							keepGoing = false;
+							break;
 						default:
 							Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
 							break;
