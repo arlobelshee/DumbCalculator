@@ -21,11 +21,16 @@ namespace DumbCalculator
 		private static readonly Dictionary<string, decimal> Variables = new Dictionary<string, decimal>();
 
 		private static void Main(string[] args)
-		{
+        {
             var userInteraction = new ReadWriteToConsole();
+            Applesauce(userInteraction);
+        }
+
+        private static void Applesauce(ReadWriteToConsole userInteraction)
+        {
             Console.WriteLine(
-				"I wish to do your bidding! I'm an RPN interpreter! I also support variables. Use the special command ? to get help.");
-			while (true)
+                "I wish to do your bidding! I'm an RPN interpreter! I also support variables. Use the special command ? to get help.");
+            while (true)
             {
                 userInteraction.Write("> ");
                 var input = Console.ReadLine().Trim();
