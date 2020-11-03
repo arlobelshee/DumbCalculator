@@ -42,7 +42,7 @@ namespace DumbCalculator
                 {
                     if (Stack.Count == 0)
                     {
-                        Console.WriteLine("Nothing to store! Variable unaltered.");
+                        userInteraction.WriteLine("Nothing to store! Variable unaltered.");
                     }
                     else
                     {
@@ -58,12 +58,12 @@ namespace DumbCalculator
                     switch (input)
                     {
                         case "?":
-                            Console.WriteLine(HelpInfo);
+                            userInteraction.WriteLine(HelpInfo);
                             break;
                         case "+":
                             if (Stack.Count < 2)
                             {
-                                Console.WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+                                userInteraction.WriteLine("Not enough values to add! Please push more onto the stack and try again.");
                             }
                             else
                             {
@@ -75,7 +75,7 @@ namespace DumbCalculator
                         case "-":
                             if (Stack.Count < 2)
                             {
-                                Console.WriteLine("Not enough values to subtract! Please push more onto the stack and try again.");
+                                userInteraction.WriteLine("Not enough values to subtract! Please push more onto the stack and try again.");
                             }
                             else
                             {
@@ -87,7 +87,7 @@ namespace DumbCalculator
                         case "*":
                             if (Stack.Count < 2)
                             {
-                                Console.WriteLine("Not enough values to multiply! Please push more onto the stack and try again.");
+                                userInteraction.WriteLine("Not enough values to multiply! Please push more onto the stack and try again.");
                             }
                             else
                             {
@@ -99,7 +99,7 @@ namespace DumbCalculator
                         case "/":
                             if (Stack.Count < 2)
                             {
-                                Console.WriteLine("Not enough values to divide! Please push more onto the stack and try again.");
+                                userInteraction.WriteLine("Not enough values to divide! Please push more onto the stack and try again.");
                             }
                             else
                             {
@@ -109,23 +109,23 @@ namespace DumbCalculator
                             }
                             break;
                         case "dump":
-                            Console.WriteLine("Variables:");
+                            userInteraction.WriteLine("Variables:");
                             foreach (var variable in Variables)
                             {
                                 Console.WriteLine("	{0} := {1}", variable.Key, variable.Value);
                             }
-                            Console.WriteLine("Stack");
+                            userInteraction.WriteLine("Stack");
                             foreach (var value in Stack)
                             {
                                 Console.WriteLine("	{0}", value);
                             }
                             break;
                         case "q":
-                            Console.WriteLine("Quitting now.");
+                            userInteraction.WriteLine("Quitting now.");
                             Console.ReadLine();
                             return;
                         default:
-                            Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
+                            userInteraction.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
                             break;
                     }
                 }
