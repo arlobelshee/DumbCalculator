@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DumbCalculator
 {
-	internal class Program
+	public class Program
 	{
 		private const string HelpInfo = @"Supported commands:
 	? -> print this help.
