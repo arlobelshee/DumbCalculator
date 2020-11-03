@@ -28,7 +28,7 @@ namespace DumbCalculator
 
         private static void CalculateForUserUntilDone(ReadWriteToConsole userInteraction)
         {
-            ReadWriteToConsole.WriteLine(
+            userInteraction.WriteLine(
                 "I wish to do your bidding! I'm an RPN interpreter! I also support variables. Use the special command ? to get help.");
             while (true)
             {

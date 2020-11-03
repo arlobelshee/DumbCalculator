@@ -9,7 +9,7 @@ namespace DumbCalculator
             Console.Write(value);
         }
 
-        public static void WriteLine(string value)
+        public void WriteLine(string value)
         {
             Console.WriteLine(value);
         }
