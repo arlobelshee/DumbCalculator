@@ -33,7 +33,7 @@ namespace DumbCalculator
             while (true)
             {
                 userInteraction.Write("> ");
-                var input = ReadWriteToConsole.ReadLine().Trim();
+                var input = userInteraction.ReadLine().Trim();
                 if (decimal.TryParse(input, out decimal number))
                 {
                     Stack.Push(number);

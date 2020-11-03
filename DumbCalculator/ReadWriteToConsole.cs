@@ -14,7 +14,7 @@ namespace DumbCalculator
             Console.WriteLine(formatOrValue, values);
         }
 
-        public static string ReadLine()
+        public string ReadLine()
         {
             return Console.ReadLine();
         }
