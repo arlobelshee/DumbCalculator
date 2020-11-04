@@ -29,23 +29,9 @@ namespace DumbCalculator
                 Stack.Push(number);
                 return true;
             }
-            if (input.StartsWith("="))
-            {
-                if (Stack.Count == 0)
-                {
-                    Console.WriteLine("Nothing to store! Variable unaltered.");
-                }
-                else
-                {
-                    Variables[input.Substring(1)] = Stack.Pop();
-                }
-                return true;
-            }
-            if (input.StartsWith("$"))
-            {
-                Stack.Push(Variables[input.Substring(1)]);
-                return true;
-            }
+            bool? result;
+            result = HandleVariables(input);
+            if (result.HasValue) return result.Value;
             switch (input)
             {
                 case "?":
@@ -120,6 +106,28 @@ namespace DumbCalculator
             }
 
             return true;
+        }
+
+        private bool? HandleVariables(string input)
+        {
+            if (input.StartsWith("="))
+            {
+                if (Stack.Count == 0)
+                {
+                    Console.WriteLine("Nothing to store! Variable unaltered.");
+                }
+                else
+                {
+                    Variables[input.Substring(1)] = Stack.Pop();
+                }
+                return true;
+            }
+            if (input.StartsWith("$"))
+            {
+                Stack.Push(Variables[input.Substring(1)]);
+                return true;
+            }
+            return null;
         }
     }
 }
