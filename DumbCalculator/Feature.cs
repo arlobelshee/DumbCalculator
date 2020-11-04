@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DumbCalculator
 {
@@ -14,7 +15,15 @@ namespace DumbCalculator
     {
         public static bool IsActive(this Feature which)
         {
-            return FeatureConfigDb.hardCodedValues.GetValueOrDefault(which) ?? false;
+            return FeatureConfigDb.temporaryOverrides.GetValueOrDefault(which) ??
+                FeatureConfigDb.hardCodedValues.GetValueOrDefault(which) ??
+                false;
+        }
+
+        public static IDisposable OverrideTo(this Feature which, bool newValue)
+        {
+            FeatureConfigDb.temporaryOverrides[which] = newValue;
+            return new Undo(()=> FeatureConfigDb.temporaryOverrides.Remove(which));
         }
     }
 
