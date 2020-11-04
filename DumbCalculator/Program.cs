@@ -41,8 +41,9 @@ namespace DumbCalculator
             if (decimal.TryParse(input, out decimal number))
             {
                 Stack.Push(number);
+                return true;
             }
-            else if (input.StartsWith("="))
+            if (input.StartsWith("="))
             {
                 if (Stack.Count == 0)
                 {
@@ -52,85 +53,84 @@ namespace DumbCalculator
                 {
                     Variables[input.Substring(1)] = Stack.Pop();
                 }
+                return true;
             }
-            else if (input.StartsWith("$"))
+            if (input.StartsWith("$"))
             {
                 Stack.Push(Variables[input.Substring(1)]);
+                return true;
             }
-            else
+            switch (input)
             {
-                switch (input)
-                {
-                    case "?":
-                        Console.WriteLine(HelpInfo);
-                        break;
-                    case "+":
-                        if (Stack.Count < 2)
-                        {
-                            Console.WriteLine("Not enough values to add! Please push more onto the stack and try again.");
-                        }
-                        else
-                        {
-                            var top = Stack.Pop();
-                            var second = Stack.Pop();
-                            Stack.Push(second + top);
-                        }
-                        break;
-                    case "-":
-                        if (Stack.Count < 2)
-                        {
-                            Console.WriteLine("Not enough values to subtract! Please push more onto the stack and try again.");
-                        }
-                        else
-                        {
-                            var top = Stack.Pop();
-                            var second = Stack.Pop();
-                            Stack.Push(second - top);
-                        }
-                        break;
-                    case "*":
-                        if (Stack.Count < 2)
-                        {
-                            Console.WriteLine("Not enough values to multiply! Please push more onto the stack and try again.");
-                        }
-                        else
-                        {
-                            var top = Stack.Pop();
-                            var second = Stack.Pop();
-                            Stack.Push(second * top);
-                        }
-                        break;
-                    case "/":
-                        if (Stack.Count < 2)
-                        {
-                            Console.WriteLine("Not enough values to divide! Please push more onto the stack and try again.");
-                        }
-                        else
-                        {
-                            var top = Stack.Pop();
-                            var second = Stack.Pop();
-                            Stack.Push(second / top);
-                        }
-                        break;
-                    case "dump":
-                        Console.WriteLine("Variables:");
-                        foreach (var variable in Variables)
-                        {
-                            Console.WriteLine("	{0} := {1}", variable.Key, variable.Value);
-                        }
-                        Console.WriteLine("Stack");
-                        foreach (var value in Stack)
-                        {
-                            Console.WriteLine("	{0}", value);
-                        }
-                        break;
-                    case "q":
-                        Console.WriteLine("Quitting now.");
-                        return false;
-                    default:
-                        Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
-                        break;
-                }
+                case "?":
+                    Console.WriteLine(HelpInfo);
+                    break;
+                case "+":
+                    if (Stack.Count < 2)
+                    {
+                        Console.WriteLine("Not enough values to add! Please push more onto the stack and try again.");
+                    }
+                    else
+                    {
+                        var top = Stack.Pop();
+                        var second = Stack.Pop();
+                        Stack.Push(second + top);
+                    }
+                    break;
+                case "-":
+                    if (Stack.Count < 2)
+                    {
+                        Console.WriteLine("Not enough values to subtract! Please push more onto the stack and try again.");
+                    }
+                    else
+                    {
+                        var top = Stack.Pop();
+                        var second = Stack.Pop();
+                        Stack.Push(second - top);
+                    }
+                    break;
+                case "*":
+                    if (Stack.Count < 2)
+                    {
+                        Console.WriteLine("Not enough values to multiply! Please push more onto the stack and try again.");
+                    }
+                    else
+                    {
+                        var top = Stack.Pop();
+                        var second = Stack.Pop();
+                        Stack.Push(second * top);
+                    }
+                    break;
+                case "/":
+                    if (Stack.Count < 2)
+                    {
+                        Console.WriteLine("Not enough values to divide! Please push more onto the stack and try again.");
+                    }
+                    else
+                    {
+                        var top = Stack.Pop();
+                        var second = Stack.Pop();
+                        Stack.Push(second / top);
+                    }
+                    break;
+                case "dump":
+                    Console.WriteLine("Variables:");
+                    foreach (var variable in Variables)
+                    {
+                        Console.WriteLine("	{0} := {1}", variable.Key, variable.Value);
+                    }
+                    Console.WriteLine("Stack");
+                    foreach (var value in Stack)
+                    {
+                        Console.WriteLine("	{0}", value);
+                    }
+                    break;
+                case "q":
+                    Console.WriteLine("Quitting now.");
+                    return false;
+                default:
+                    Console.WriteLine("I have no idea what you mean. Use ? to ask for help if you want it.");
+                    break;
             }
 
             return true;
