@@ -27,6 +27,22 @@ namespace DumbCalculator.Test
         {
             using (Feature.InitiallyEnabledFeature.OverrideTo(false))
             {
+                using (Feature.InitiallyDisabledFeature.OverrideTo(true))
+                {
+                    Feature.InitiallyDisabledFeature.IsActive().Should().BeTrue();
+                    Feature.InitiallyEnabledFeature.IsActive().Should().BeFalse();
+                }
+                Feature.InitiallyDisabledFeature.IsActive().Should().BeFalse();
+                Feature.InitiallyEnabledFeature.IsActive().Should().BeFalse();
+            }
+            Feature.InitiallyEnabledFeature.IsActive().Should().BeTrue();
+        }
+
+        [Fact]
+        public void TestsCanOverrideMultipleFeatureValuesIndependently()
+        {
+            using (Feature.InitiallyEnabledFeature.OverrideTo(false))
+            {
                 Feature.InitiallyEnabledFeature.IsActive().Should().BeFalse();
             }
             Feature.InitiallyEnabledFeature.IsActive().Should().BeTrue();
