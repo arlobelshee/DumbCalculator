@@ -10,13 +10,13 @@ namespace DumbCalculator.Test
         {
             var testSubject = new Calculator();
             // Push 2
-            Calculator.HandleOneUserInput("2");
+            testSubject.HandleOneUserInput("2");
             // Push 4
-            Calculator.HandleOneUserInput("4");
+            testSubject.HandleOneUserInput("4");
             // Push + operation
-            Calculator.HandleOneUserInput("+");
+            testSubject.HandleOneUserInput("+");
             // Verify stack contains 6
-            Approvals.VerifyAll("Stack", Calculator.StackContents, value => value.ToString());
+            Approvals.VerifyAll("Stack", testSubject.StackContents, value => value.ToString());
         }
     }
 }
