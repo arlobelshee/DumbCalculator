@@ -29,7 +29,8 @@ namespace DumbCalculator
                 Stack.Push(number);
                 return true;
             }
-            var result = HandleVariables(input);
+            bool? result;
+            result = HandleVariables(input);
             if (result.HasValue) return result.Value;
             switch (input)
             {
