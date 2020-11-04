@@ -30,7 +30,14 @@ namespace DumbCalculator
                 return true;
             }
             bool? result;
-            result = HandleVariables(input);
+            if (Feature.NewVariables.IsActive())
+            {
+                result = HandleVariables_NewWay(input);
+            }
+            else
+            {
+                result = HandleVariables_OldWay(input);
+            }
             if (result.HasValue) return result.Value;
             switch (input)
             {
@@ -108,7 +115,29 @@ namespace DumbCalculator
             return true;
         }
 
-        private bool? HandleVariables(string input)
+        private bool? HandleVariables_OldWay(string input)
+        {
+            if (input.StartsWith("="))
+            {
+                if (Stack.Count == 0)
+                {
+                    Console.WriteLine("Nothing to store! Variable unaltered.");
+                }
+                else
+                {
+                    Variables[input.Substring(1)] = Stack.Pop();
+                }
+                return true;
+            }
+            if (input.StartsWith("$"))
+            {
+                Stack.Push(Variables[input.Substring(1)]);
+                return true;
+            }
+            return null;
+        }
+
+        private bool? HandleVariables_NewWay(string input)
         {
             if (input.StartsWith("="))
             {
