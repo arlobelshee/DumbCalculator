@@ -30,7 +30,14 @@ namespace DumbCalculator
                 return true;
             }
             bool? result;
-            result = HandleVariables(input);
+            if (Feature.NewVariables.IsActive())
+            {
+                result = HandleVariables(input);
+            }
+            else
+            {
+                result = HandleVariables(input);
+            }
             if (result.HasValue) return result.Value;
             switch (input)
             {
