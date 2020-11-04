@@ -13,13 +13,23 @@ namespace DumbCalculator.Test
         }
 
         [Fact]
-        public void TestsCanOverrideFeatureValues()
+        public void TestsCanOverrideInitiallyFalseFeatureValues()
         {
             using(Feature.InitiallyDisabledFeature.OverrideTo(true))
             {
                 Feature.InitiallyDisabledFeature.IsActive().Should().BeTrue();
             }
             Feature.InitiallyDisabledFeature.IsActive().Should().BeFalse();
+        }
+
+        [Fact]
+        public void TestsCanOverrideInitiallyTrueFeatureValues()
+        {
+            using (Feature.InitiallyEnabledFeature.OverrideTo(false))
+            {
+                Feature.InitiallyEnabledFeature.IsActive().Should().BeFalse();
+            }
+            Feature.InitiallyEnabledFeature.IsActive().Should().BeTrue();
         }
     }
 }
