@@ -38,26 +38,54 @@ namespace DumbCalculator
 
         public static bool HandleOneUserInput(string input)
         {
+            bool haveHandledInput = false;
             if (decimal.TryParse(input, out decimal number))
             {
                 Stack.Push(number);
+                haveHandledInput = true;
             }
-            else if (input.StartsWith("="))
+            if (!haveHandledInput && Feature.NewVariables.IsActive())
             {
-                if (Stack.Count == 0)
+                if (input.StartsWith("="))
                 {
-                    Console.WriteLine("Nothing to store! Variable unaltered.");
+                    if (Stack.Count == 0)
+                    {
+                        Console.WriteLine("Nothing to store! Variable unaltered.");
+                    }
+                    else
+                    {
+                        Variables[input.Substring(1)] = Stack.Pop();
+                    }
+                    haveHandledInput = true;
                 }
-                else
+                else if (input.StartsWith("$"))
                 {
-                    Variables[input.Substring(1)] = Stack.Pop();
+                    Stack.Push(Variables[input.Substring(1)]);
+                    haveHandledInput = true;
                 }
-            }
-            else if (input.StartsWith("$"))
-            {
-                Stack.Push(Variables[input.Substring(1)]);
             }
             else
+            {
+                if (input.StartsWith("="))
+                {
+                    if (Stack.Count == 0)
+                    {
+                        Console.WriteLine("Nothing to store! Variable unaltered.");
+                    }
+                    else
+                    {
+                        Variables[input.Substring(1)] = Stack.Pop();
+                    }
+                    haveHandledInput = true;
+                }
+                else if (input.StartsWith("$"))
+                {
+                    Stack.Push(Variables[input.Substring(1)]);
+                    haveHandledInput = true;
+                }
+            }
+
+            if (!haveHandledInput)
             {
                 switch (input)
                 {
