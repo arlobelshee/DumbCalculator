@@ -9,6 +9,7 @@ namespace DumbCalculator.Test
         public void FeaturesStartWithCorrectInitialValues()
         {
             Feature.InitiallyDisabledFeature.IsActive().Should().BeFalse();
+            Feature.InitiallyEnabledFeature.IsActive().Should().BeTrue();
         }
     }
 }
