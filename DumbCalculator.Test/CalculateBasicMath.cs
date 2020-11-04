@@ -8,14 +8,15 @@ namespace DumbCalculator.Test
         [Fact]
         public void VerifyAddition()
         {
+            var testSubject = new Calculator();
             // Push 2
-            Program.HandleOneUserInput("2");
+            Calculator.HandleOneUserInput("2");
             // Push 4
-            Program.HandleOneUserInput("4");
+            Calculator.HandleOneUserInput("4");
             // Push + operation
-            Program.HandleOneUserInput("+");
+            Calculator.HandleOneUserInput("+");
             // Verify stack contains 6
-            Approvals.VerifyAll("Stack", Program.StackContents, value => value.ToString());
+            Approvals.VerifyAll("Stack", Calculator.StackContents, value => value.ToString());
         }
     }
 }
